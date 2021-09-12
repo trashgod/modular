@@ -5,3 +5,5 @@ This JavaFX application renders chords connecting points on a circle. Patterns e
 To run the program from the command line, type:
 
     mvn clean javafx:run
+
+![ModularApp.png](https://github.com/trashgod/modular/blob/master/ModularApp.png)
