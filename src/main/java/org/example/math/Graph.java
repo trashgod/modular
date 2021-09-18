@@ -62,7 +62,7 @@ public class Graph {
         g.fillRect(0, 0, w, h);
         g.setStroke(fg.get());
         g.strokeArc(cx - r, cy - r, 2 * r, 2 * r, 0, 359, ArcType.CHORD);
-        double offset = (flip.get() ? Math.PI : 0);
+        double offset = flip.get() ? Math.PI : 0;
         for (int i = 0; i < p.get(); i++) {
             double t1 = 2 * Math.PI * i / p.get() + offset;
             double x1 = Math.cos(t1) * r + cx;
