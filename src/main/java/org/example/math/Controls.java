@@ -12,6 +12,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -42,14 +43,16 @@ public class Controls {
         pSpinner.setEditable(true);
         graph.pProperty().bindBidirectional(pSpinner.getValueFactory().valueProperty());
 
+        HBox mBox = new HBox(new Label("Multiplier: "), mSpinner);
+        mBox.setAlignment(Pos.CENTER);
+        HBox pBox = new HBox(new Label("Points: "), pSpinner);
+        pBox.setAlignment(Pos.CENTER);
         GridPane grid = new GridPane();
-        grid.addRow(0, new Label("Multiplier:"), new Label("Points:"));
-        grid.addRow(1, mSlider, pSlider);
-        grid.addRow(2, mSpinner, pSpinner);
+        grid.addRow(0, mSlider, pSlider);
+        grid.addRow(1, mBox, pBox);
         ColumnConstraints sc = new ColumnConstraints(Slider.USE_COMPUTED_SIZE,
             Slider.USE_COMPUTED_SIZE, Double.MAX_VALUE, Priority.ALWAYS, null, true);
         grid.getColumnConstraints().addAll(sc, sc);
-        grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(8, 8, 8, 8));
         grid.setHgap(4);
         grid.setVgap(4);
