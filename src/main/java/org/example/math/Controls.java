@@ -1,5 +1,6 @@
 package org.example.math;
 
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -20,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class Controls {
@@ -67,11 +69,11 @@ public class Controls {
     public Pane createSettingsPane() {
         ColorPicker bgPicker = new ColorPicker(graph.bgProperty().get());
         bgPicker.setTooltip(new Tooltip("Background color."));
-        graph.bgProperty().bind(bgPicker.valueProperty());
+        graph.bgProperty().bindBidirectional(bgPicker.valueProperty());
 
         ColorPicker fgPicker = new ColorPicker(graph.fgProperty().get());
         fgPicker.setTooltip(new Tooltip("Foreground color."));
-        graph.fgProperty().bind(fgPicker.valueProperty());
+        graph.fgProperty().bindBidirectional(fgPicker.valueProperty());
 
         CheckBox cb = new CheckBox("Flip origin:");
         cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
@@ -92,9 +94,12 @@ public class Controls {
         timeline.setAutoReverse(true);
         KeyValue mKV = new KeyValue(graph.mProperty(), MAX);
         KeyValue pKV = new KeyValue(graph.pProperty(), MAX);
+        KeyValue fgKV = new KeyValue(graph.fgProperty(),
+            graph.fgProperty().get(), new HSBInterpolator());
         KeyFrame mKF = new KeyFrame(Duration.seconds(30), mKV);
         KeyFrame pKF = new KeyFrame(Duration.seconds(30), pKV);
-        timeline.getKeyFrames().addAll(mKF, pKF);
+        KeyFrame fgKF = new KeyFrame(Duration.seconds(30), fgKV);
+        timeline.getKeyFrames().addAll(mKF, pKF, fgKF);
         cb.selectedProperty().addListener((Observable o) -> {
             if (cb.isSelected()) {
                 timeline.play();
@@ -103,5 +108,25 @@ public class Controls {
             }
         });
         return cb;
+    }
+
+    /**
+     * A linear interpolator that spans the hue of the first and last color or
+     * 360 degrees if the colors match.
+     */
+    private static class HSBInterpolator extends Interpolator {
+
+        @Override
+        protected double curve(double t) {
+            return t; // linear
+        }
+
+        @Override
+        public Object interpolate(Object first, Object last, double t) {
+            Color f = (Color) first;
+            Color l = (Color) last;
+            double a = f.equals(l) ? 360 : l.getHue() - f.getHue();
+            return Color.hsb(f.getHue() + curve(t) * a, f.getSaturation(), f.getBrightness());
+        }
     }
 }
