@@ -1,6 +1,10 @@
 package org.example.math;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -16,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class Controls {
 
@@ -73,9 +78,30 @@ public class Controls {
         cb.setSelected(graph.flipProperty().get());
         graph.flipProperty().bind(cb.selectedProperty());
 
-        final VBox vBox = new VBox(bgPicker, fgPicker, cb);
+        final VBox vBox = new VBox(bgPicker, fgPicker, cb, createAnimation());
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(8);
         return vBox;
+    }
+
+    private CheckBox createAnimation() {
+        CheckBox cb = new CheckBox("Animate:");
+        cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        final Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setAutoReverse(true);
+        KeyValue mKV = new KeyValue(graph.mProperty(), MAX);
+        KeyValue pKV = new KeyValue(graph.pProperty(), MAX);
+        KeyFrame mKF = new KeyFrame(Duration.seconds(30), mKV);
+        KeyFrame pKF = new KeyFrame(Duration.seconds(30), pKV);
+        timeline.getKeyFrames().addAll(mKF, pKF);
+        cb.selectedProperty().addListener((Observable o) -> {
+            if (cb.isSelected()) {
+                timeline.play();
+            } else {
+                timeline.stop();
+            }
+        });
+        return cb;
     }
 }
