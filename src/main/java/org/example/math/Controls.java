@@ -94,8 +94,7 @@ public class Controls {
         timeline.setAutoReverse(true);
         KeyValue mKV = new KeyValue(graph.mProperty(), MAX);
         KeyValue pKV = new KeyValue(graph.pProperty(), MAX);
-        KeyValue fgKV = new KeyValue(graph.fgProperty(),
-            graph.fgProperty().get(), new HSBInterpolator());
+        KeyValue fgKV = new KeyValue(graph.fgProperty(), null, new HueInterpolator());
         KeyFrame mKF = new KeyFrame(Duration.seconds(30), mKV);
         KeyFrame pKF = new KeyFrame(Duration.seconds(30), pKV);
         KeyFrame fgKF = new KeyFrame(Duration.seconds(30), fgKV);
@@ -111,10 +110,10 @@ public class Controls {
     }
 
     /**
-     * A linear interpolator that spans the hue of the first and last color or
-     * 360 degrees if the colors match.
+     * A linear interpolator that spans the full 360 degree hue range of the the
+     * initial color; saturation, brightness and the second color are ignored.
      */
-    private static class HSBInterpolator extends Interpolator {
+    private static class HueInterpolator extends Interpolator {
 
         @Override
         protected double curve(double t) {
@@ -123,10 +122,9 @@ public class Controls {
 
         @Override
         public Object interpolate(Object first, Object last, double t) {
-            Color f = (Color) first;
-            Color l = (Color) last;
-            double a = f.equals(l) ? 360 : l.getHue() - f.getHue();
-            return Color.hsb(f.getHue() + curve(t) * a, f.getSaturation(), f.getBrightness());
+            Color c = (Color) first;
+            double hue = c.getHue() + curve(t) * 360;
+            return Color.hsb(hue, c.getSaturation(), c.getBrightness());
         }
     }
 }
