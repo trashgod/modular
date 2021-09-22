@@ -16,7 +16,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
 /**
- * A Graph rendering chords connecting points on a circle.
+ * A {@code Graph} that renders chords connecting points on a circle.
+ *
+ * @see <a href="https://stackoverflow.com/a/2510048/230513">Draw a circle with
+ * a radius and points around the edge.</a>
  */
 public class Graph {
 
@@ -50,8 +53,7 @@ public class Graph {
     }
 
     private void update() {
-        //clear canvas; connect every m points around a circle with lines
-        //https://stackoverflow.com/a/2510048/230513
+        // clear canvas; connect every m points around a circle with lines
         GraphicsContext g = canvas.getGraphicsContext2D();
         double w = pane.getWidth();
         double h = pane.getHeight();

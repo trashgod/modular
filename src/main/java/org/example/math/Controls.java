@@ -24,16 +24,33 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * {@code Controls} that alter the properties of a {@code Graph}.
+ */
 public class Controls {
 
     private static final int MIN = 2;
     private static final int MAX = 256;
     private final Graph graph;
 
+    /**
+     * Controls that alter a {@code Graph}.
+     *
+     * @param graph the {@code Graph} that the controls affect
+     */
     public Controls(Graph graph) {
         this.graph = graph;
     }
 
+    /**
+     * A panel of controls to adjust the multiplier and number of points on the
+     * {@code Graph} using a {@code Spinner} and {@code Slider} for each.
+     *
+     * @see <a href="https://stackoverflow.com/a/55427307/230513">Connecting a
+     * Slider and Spinner…</a>
+     *
+     * @return a {@code Pane} containing value controls
+     */
     public Pane createValuesPane() {
         Slider mSlider = new Slider(0, MAX, graph.mProperty().get());
         mSlider.setBlockIncrement(0.1);
@@ -66,24 +83,44 @@ public class Controls {
         return grid;
     }
 
+    /**
+     * A panel of controls to adjust the foreground and background colors of the
+     * {@code Graph}, as well as controls for rotation and animation.
+     *
+     * @return a {@code Pane} containing value controls
+     */
     public Pane createSettingsPane() {
+        final ColorPicker bgPicker = createBackgroundPicker();
+        final ColorPicker fgPicker = createForegroundPicker();
+        final CheckBox rotation = createRotateOrigin();
+        final CheckBox animation = createAnimation();
+        final VBox vBox = new VBox(8);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation);
+        return vBox;
+    }
+
+    private ColorPicker createBackgroundPicker() {
         ColorPicker bgPicker = new ColorPicker(graph.bgProperty().get());
         bgPicker.setTooltip(new Tooltip("Background color."));
         graph.bgProperty().bindBidirectional(bgPicker.valueProperty());
+        return bgPicker;
+    }
 
+    private ColorPicker createForegroundPicker() {
         ColorPicker fgPicker = new ColorPicker(graph.fgProperty().get());
         fgPicker.setTooltip(new Tooltip("Foreground color."));
         graph.fgProperty().bindBidirectional(fgPicker.valueProperty());
+        return fgPicker;
+    }
 
-        CheckBox cb = new CheckBox("Flip origin:");
+    private CheckBox createRotateOrigin() {
+        CheckBox cb = new CheckBox("Rotate origin:");
+        cb.setTooltip(new Tooltip("Rotate origin 180°."));
         cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         cb.setSelected(graph.flipProperty().get());
         graph.flipProperty().bind(cb.selectedProperty());
-
-        final VBox vBox = new VBox(bgPicker, fgPicker, cb, createAnimation());
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(8);
-        return vBox;
+        return cb;
     }
 
     private CheckBox createAnimation() {
@@ -110,8 +147,8 @@ public class Controls {
     }
 
     /**
-     * A linear interpolator that spans the full 360 degree hue range of the the
-     * initial color; saturation, brightness and the second color are ignored.
+     * A linear {@code Interpolator} that spans the full 360 degree hue range of
+     * the first color; saturation, brightness and the last color are ignored.
      */
     private static class HueInterpolator extends Interpolator {
 
