@@ -18,8 +18,8 @@ import javafx.scene.shape.ArcType;
 /**
  * A {@code Graph} that renders chords connecting points on a circle.
  *
- * @see <a href="https://stackoverflow.com/a/2510048/230513">Draw a circle with
- * a radius and points around the edge.</a>
+ * @see <a href="https://stackoverflow.com/a/2510048/230513"><i>Draw a circle with
+ * a radius and points around the edge.</i></a>
  */
 public class Graph {
 

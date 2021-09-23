@@ -46,8 +46,8 @@ public class Controls {
      * A panel of controls to adjust the multiplier and number of points on the
      * {@code Graph} using a {@code Spinner} and {@code Slider} for each.
      *
-     * @see <a href="https://stackoverflow.com/a/55427307/230513">Connecting a
-     * Slider and Spinner…</a>
+     * @see <a href="https://stackoverflow.com/a/55427307/230513"><i>Connecting a
+     * Slider and Spinner…</i></a>
      *
      * @return a {@code Pane} containing value controls
      */

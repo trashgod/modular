@@ -10,8 +10,8 @@ import javafx.stage.Stage;
 /**
  * An application that display a {@code Graph} and {@code Controls}.
  * 
- * @see <a href="https://www.youtube.com/watch?v=qhbuKbxJsk8">Times Tables,
- * Mandelbrot and the Heart of Mathematics.</a>
+ * @see <a href="https://www.youtube.com/watch?v=qhbuKbxJsk8"><i>Times Tables,
+ * Mandelbrot and the Heart of Mathematics.</i></a>
  */
 public class ModularApp extends Application {
 
