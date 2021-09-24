@@ -93,7 +93,7 @@ public class Controls {
         final ColorPicker bgPicker = createBackgroundPicker();
         final ColorPicker fgPicker = createForegroundPicker();
         final CheckBox rotation = createRotateOrigin();
-        final CheckBox animation = createAnimation();
+        final CheckBox animation = createAnimation(Duration.seconds(30));
         final VBox vBox = new VBox(8);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation);
@@ -123,7 +123,7 @@ public class Controls {
         return cb;
     }
 
-    private CheckBox createAnimation() {
+    private CheckBox createAnimation(Duration seconds) {
         CheckBox cb = new CheckBox("Animate:");
         cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         final Timeline timeline = new Timeline();
@@ -132,9 +132,9 @@ public class Controls {
         KeyValue mKV = new KeyValue(graph.mProperty(), MAX);
         KeyValue pKV = new KeyValue(graph.pProperty(), MAX);
         KeyValue fgKV = new KeyValue(graph.fgProperty(), null, new HueInterpolator());
-        KeyFrame mKF = new KeyFrame(Duration.seconds(30), mKV);
-        KeyFrame pKF = new KeyFrame(Duration.seconds(30), pKV);
-        KeyFrame fgKF = new KeyFrame(Duration.seconds(30), fgKV);
+        KeyFrame mKF = new KeyFrame(seconds, mKV);
+        KeyFrame pKF = new KeyFrame(seconds, pKV);
+        KeyFrame fgKF = new KeyFrame(seconds, fgKV);
         timeline.getKeyFrames().addAll(mKF, pKF, fgKF);
         cb.selectedProperty().addListener((Observable o) -> {
             if (cb.isSelected()) {
