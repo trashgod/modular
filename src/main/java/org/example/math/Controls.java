@@ -25,29 +25,33 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
- * {@code Controls} that alter the properties of a {@code Graph}.
+ * {@code Controls} that alter the properties of a {@code Graph} and its
+ * {@code GraphView}.
  */
 public class Controls {
 
     private static final int MIN = 2;
     private static final int MAX = 256;
     private final Graph graph;
+    private final GraphView view;
 
     /**
      * Controls that alter a {@code Graph}.
      *
      * @param graph the {@code Graph} that the controls affect
+     * @param view the {@code GraphView} that the controls affect
      */
-    public Controls(Graph graph) {
+    public Controls(Graph graph, GraphView view) {
         this.graph = graph;
+        this.view = view;
     }
 
     /**
      * A panel of controls to adjust the multiplier and number of points on the
      * {@code Graph} using a {@code Spinner} and {@code Slider} for each.
      *
-     * @see <a href="https://stackoverflow.com/a/55427307/230513"><i>Connecting a
-     * Slider and Spinner…</i></a>
+     * @see <a href="https://stackoverflow.com/a/55427307/230513"><i>Connecting
+     * a Slider and Spinner…</i></a>
      *
      * @return a {@code Pane} containing value controls
      */
@@ -101,16 +105,16 @@ public class Controls {
     }
 
     private ColorPicker createBackgroundPicker() {
-        ColorPicker bgPicker = new ColorPicker(graph.bgProperty().get());
+        ColorPicker bgPicker = new ColorPicker(view.bgProperty().get());
         bgPicker.setTooltip(new Tooltip("Background color."));
-        graph.bgProperty().bindBidirectional(bgPicker.valueProperty());
+        view.bgProperty().bindBidirectional(bgPicker.valueProperty());
         return bgPicker;
     }
 
     private ColorPicker createForegroundPicker() {
-        ColorPicker fgPicker = new ColorPicker(graph.fgProperty().get());
+        ColorPicker fgPicker = new ColorPicker(view.fgProperty().get());
         fgPicker.setTooltip(new Tooltip("Foreground color."));
-        graph.fgProperty().bindBidirectional(fgPicker.valueProperty());
+        view.fgProperty().bindBidirectional(fgPicker.valueProperty());
         return fgPicker;
     }
 
@@ -118,8 +122,8 @@ public class Controls {
         CheckBox cb = new CheckBox("Rotate origin:");
         cb.setTooltip(new Tooltip("Rotate origin 180°."));
         cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        cb.setSelected(graph.flipProperty().get());
-        graph.flipProperty().bind(cb.selectedProperty());
+        cb.setSelected(view.rotProperty().get());
+        view.rotProperty().bind(cb.selectedProperty());
         return cb;
     }
 
@@ -131,7 +135,7 @@ public class Controls {
         timeline.setAutoReverse(true);
         KeyValue mKV = new KeyValue(graph.mProperty(), MAX);
         KeyValue pKV = new KeyValue(graph.pProperty(), MAX);
-        KeyValue fgKV = new KeyValue(graph.fgProperty(), null, new HueInterpolator());
+        KeyValue fgKV = new KeyValue(view.fgProperty(), null, new HueInterpolator());
         KeyFrame mKF = new KeyFrame(seconds, mKV);
         KeyFrame pKF = new KeyFrame(seconds, pKV);
         KeyFrame fgKF = new KeyFrame(seconds, fgKV);

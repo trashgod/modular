@@ -8,8 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * An application that display a {@code Graph} and {@code Controls}.
- * 
+ * An application that display a {@code GraphView} and {@code Controls}.
+ *
  * @see <a href="https://www.youtube.com/watch?v=qhbuKbxJsk8"><i>Times Tables,
  * Mandelbrot and the Heart of Mathematics.</i></a>
  */
@@ -18,13 +18,14 @@ public class ModularApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Modular Arithmetic Graph");
-        Graph graph = new Graph();
-        Controls controls = new Controls(graph);
+        Graph model = new Graph();
+        GraphView view = new GraphView(model);
+        Controls controls = new Controls(model, view);
         BorderPane root = new BorderPane();
         Label t = new Label("Adjust the controls below to change the graph.");
         BorderPane.setAlignment(t, Pos.CENTER);
         root.setTop(t);
-        root.setCenter(graph.getPane());
+        root.setCenter(view);
         root.setBottom(controls.createValuesPane());
         root.setLeft(controls.createSettingsPane());
         primaryStage.setScene(new Scene(root));
