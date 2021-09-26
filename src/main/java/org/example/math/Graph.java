@@ -18,13 +18,19 @@ import javafx.scene.shape.ArcType;
 /**
  * A {@code Graph} that renders chords connecting points on a circle.
  *
- * @see <a href="https://stackoverflow.com/a/2510048/230513"><i>Draw a circle with
- * a radius and points around the edge.</i></a>
+ * @see <a href="https://stackoverflow.com/a/2510048/230513"><i>Draw a circle
+ * with a radius and points around the edge.</i></a>
  */
 public class Graph {
 
+    /** Default number of points */
     public static final int POINTS = 128;
-    public static final double MULTIPLIER = 2.0;
+     /** Default multiplier */
+   public static final double MULTIPLIER = 2.0;
+    /** Default background color */
+    public static final Color bgColor = Color.BLACK; 
+    /** Default foreground color */
+    public static final Color fgColor = Color.CYAN; 
     private static final double WIDTH = 500;
     private static final double HEIGHT = 500;
     private static final int INSET = 8;
@@ -32,8 +38,8 @@ public class Graph {
     private final Canvas canvas = new Canvas();
     private final IntegerProperty p = new SimpleIntegerProperty(POINTS);
     private final DoubleProperty m = new SimpleDoubleProperty(MULTIPLIER);
-    private final ObjectProperty<Color> bg = new SimpleObjectProperty<>(Color.BLACK);
-    private final ObjectProperty<Color> fg = new SimpleObjectProperty<>(Color.CYAN);
+    private final ObjectProperty<Color> bg = new SimpleObjectProperty<>(bgColor);
+    private final ObjectProperty<Color> fg = new SimpleObjectProperty<>(fgColor);
     private final BooleanProperty flip = new SimpleBooleanProperty(true);
     private final InvalidationListener listener = ((o) -> update());
 
@@ -113,9 +119,16 @@ public class Graph {
     }
 
     /**
-     * @return this graph's parent node
+     * @return this graph's display {@code Pane}
      */
     public Pane getPane() {
         return pane;
+    }
+
+    /**
+     * @return this graph's display {@code Canvas}
+     */
+    public Canvas getCanvas() {
+        return canvas;
     }
 }
