@@ -9,6 +9,7 @@ import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
@@ -98,9 +99,10 @@ public class Controls {
         final ColorPicker fgPicker = createForegroundPicker();
         final CheckBox rotation = createRotateOrigin();
         final CheckBox animation = createAnimation(Duration.seconds(30));
+        final Button reset = createReset();
         final VBox vBox = new VBox(8);
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation);
+        vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation, reset);
         return vBox;
     }
 
@@ -148,6 +150,17 @@ public class Controls {
             }
         });
         return cb;
+    }
+
+    private Button createReset() {
+        Button reset = new Button("Reset");
+        reset.setOnAction((t) -> {
+            graph.pProperty().set(Graph.POINTS);
+            graph.mProperty().set(Graph.MULTIPLIER);
+            view.bgProperty().set(GraphView.bgColor);
+            view.fgProperty().set(GraphView.fgColor);
+        });
+        return reset;
     }
 
     /**

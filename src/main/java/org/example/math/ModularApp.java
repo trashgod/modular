@@ -18,6 +18,11 @@ public class ModularApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Modular Arithmetic Graph");
+        primaryStage.setScene(new Scene(createApp()));
+        primaryStage.show();
+    }
+
+    private BorderPane createApp() {
         Graph model = new Graph();
         GraphView view = new GraphView(model);
         Controls controls = new Controls(model, view);
@@ -28,8 +33,7 @@ public class ModularApp extends Application {
         root.setCenter(view);
         root.setBottom(controls.createValuesPane());
         root.setLeft(controls.createSettingsPane());
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        return root;
     }
 
     public static void main(String[] args) {
