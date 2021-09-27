@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
 /**
- * A {@code Pane} that provides a view of a {@code Graph}.
+ * A {@code Pane} that renders a view of a {@code Graph}.
  *
  * @see <a href="https://stackoverflow.com/a/2510048/230513"><i>Draw a circle
  * with a radius and points around the edge.</i></a>
@@ -35,7 +35,7 @@ public class GraphView extends Pane {
     private final BooleanProperty rot = new SimpleBooleanProperty(true);
     private final Graph graph;
     private final Canvas canvas = new Canvas();
-    private final InvalidationListener listener = ((o) -> update());
+    private final InvalidationListener listener = (o) -> update();
 
     public GraphView(Graph graph) {
         this.graph = graph;
