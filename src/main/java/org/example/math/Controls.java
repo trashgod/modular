@@ -89,6 +89,16 @@ public class Controls {
     }
 
     /**
+     * A general message label.
+     *
+     * @return a {@code Label} containing a message.
+     */
+    public Label createStatusPane() {
+        Label label = new Label("Adjust the controls below to change the graph.");
+        return label;
+    }
+
+    /**
      * A panel of controls to adjust the foreground and background colors of the
      * {@code Graph}, as well as controls for rotation and animation.
      *
