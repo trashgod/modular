@@ -9,6 +9,8 @@ import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
@@ -16,6 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -110,9 +115,10 @@ public class Controls {
         final CheckBox rotation = createRotateOrigin();
         final CheckBox animation = createAnimation(Duration.seconds(30));
         final Button reset = createReset();
+        final Button copy = createCopyButton();
         final VBox vBox = new VBox(8);
         vBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation, reset);
+        vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation, reset, copy);
         return vBox;
     }
 
@@ -164,6 +170,7 @@ public class Controls {
 
     private Button createReset() {
         Button reset = new Button("Reset");
+        reset.setTooltip(new Tooltip("Reset model and view parameters."));
         reset.setOnAction((t) -> {
             graph.pProperty().set(Graph.POINTS);
             graph.mProperty().set(Graph.MULTIPLIER);
@@ -171,6 +178,23 @@ public class Controls {
             view.fgProperty().set(GraphView.fgColor);
         });
         return reset;
+    }
+
+    private Button createCopyButton() {
+        Button copy = new Button("Copy");
+        copy.setTooltip(new Tooltip("Copy image to clipboard."));
+        copy.setOnAction((t) -> {
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            ClipboardContent content = new ClipboardContent();
+            Canvas canvas = view.getCanvas();
+            int w = (int) canvas.getWidth();
+            int h = (int) canvas.getHeight();
+            WritableImage image = canvas.snapshot(
+                new SnapshotParameters(), new WritableImage(w, h));
+            content.putImage(image);
+            clipboard.setContent(content);
+        });
+        return copy;
     }
 
     /**
