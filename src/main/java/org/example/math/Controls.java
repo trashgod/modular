@@ -40,6 +40,8 @@ public class Controls {
     private static final int MAX = 256;
     private final Graph graph;
     private final GraphView view;
+    // Some controls will be disabled during animation
+    private final CheckBox animate = new CheckBox("Animate:");
 
     /**
      * Controls that alter a {@code Graph}.
@@ -64,17 +66,21 @@ public class Controls {
     public Pane createValuesPane() {
         Slider mSlider = new Slider(0, MAX, graph.mProperty().get());
         mSlider.setBlockIncrement(0.1);
+        mSlider.disableProperty().bind(animate.selectedProperty());
         graph.mProperty().bindBidirectional(mSlider.valueProperty());
         Spinner<Number> mSpinner = new Spinner<>(MIN, MAX, Graph.MULTIPLIER, 0.1);
         mSpinner.setEditable(true);
+        mSpinner.disableProperty().bind(animate.selectedProperty());
         graph.mProperty().bindBidirectional(mSpinner.getValueFactory().valueProperty());
         Platform.runLater(mSpinner::requestFocus);
 
         Slider pSlider = new Slider(0, MAX, graph.pProperty().get());
         pSlider.setBlockIncrement(1);
+        pSlider.disableProperty().bind(animate.selectedProperty());
         graph.pProperty().bindBidirectional(pSlider.valueProperty());
         Spinner<Number> pSpinner = new Spinner<>(MIN, MAX, Graph.POINTS);
         pSpinner.setEditable(true);
+        pSpinner.disableProperty().bind(animate.selectedProperty());
         graph.pProperty().bindBidirectional(pSpinner.getValueFactory().valueProperty());
 
         HBox mBox = new HBox(new Label("Multiplier: "), mSpinner);
@@ -133,21 +139,21 @@ public class Controls {
         ColorPicker fgPicker = new ColorPicker(view.fgProperty().get());
         fgPicker.setTooltip(new Tooltip("Foreground color."));
         view.fgProperty().bindBidirectional(fgPicker.valueProperty());
+        fgPicker.disableProperty().bind(animate.selectedProperty());
         return fgPicker;
     }
 
     private CheckBox createRotateOrigin() {
-        CheckBox cb = new CheckBox("Rotate origin:");
-        cb.setTooltip(new Tooltip("Rotate origin 180°."));
-        cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        cb.setSelected(view.rotProperty().get());
-        view.rotProperty().bind(cb.selectedProperty());
-        return cb;
+        CheckBox rot = new CheckBox("Rotate origin:");
+        rot.setTooltip(new Tooltip("Rotate origin 180°."));
+        rot.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        rot.setSelected(view.rotProperty().get());
+        view.rotProperty().bind(rot.selectedProperty());
+        return rot;
     }
 
     private CheckBox createAnimation(Duration seconds) {
-        CheckBox cb = new CheckBox("Animate:");
-        cb.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        animate.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
@@ -158,14 +164,14 @@ public class Controls {
         KeyFrame pKF = new KeyFrame(seconds, pKV);
         KeyFrame fgKF = new KeyFrame(seconds, fgKV);
         timeline.getKeyFrames().addAll(mKF, pKF, fgKF);
-        cb.selectedProperty().addListener((Observable o) -> {
-            if (cb.isSelected()) {
+        animate.selectedProperty().addListener((Observable o) -> {
+            if (animate.isSelected()) {
                 timeline.play();
             } else {
                 timeline.stop();
             }
         });
-        return cb;
+        return animate;
     }
 
     private Button createReset() {
@@ -177,6 +183,7 @@ public class Controls {
             view.bgProperty().set(GraphView.bgColor);
             view.fgProperty().set(GraphView.fgColor);
         });
+        reset.disableProperty().bind(animate.selectedProperty());
         return reset;
     }
 
