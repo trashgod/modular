@@ -5,7 +5,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -105,7 +104,11 @@ public class Controls {
      * @return a {@code Label} containing a message.
      */
     public Label createStatusPane() {
-        Label label = new Label("Adjust the controls below to change the graph.");
+        String greet = "Adjust the controls below to change the graph.";
+        String alert = "Some controls are disabled during animation.";
+        Label label = new Label(greet);
+        animate.selectedProperty().addListener(
+            (o) -> label.setText(animate.isSelected() ? alert : greet));
         return label;
     }
 
@@ -165,7 +168,7 @@ public class Controls {
         KeyFrame pKF = new KeyFrame(seconds, pKV);
         KeyFrame fgKF = new KeyFrame(seconds, fgKV);
         timeline.getKeyFrames().addAll(mKF, pKF, fgKF);
-        animate.selectedProperty().addListener((Observable o) -> {
+        animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
                 timeline.play();
             } else {
