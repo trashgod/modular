@@ -12,11 +12,11 @@ import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.Clipboard;
@@ -41,7 +41,7 @@ public class Controls {
     private final Graph graph;
     private final GraphView view;
     // Some controls will be disabled during animation
-    private final CheckBox animate = new CheckBox("Animate:");
+    private final ToggleButton animate = new ToggleButton("Animate");
 
     /**
      * Controls that alter a {@code Graph}.
@@ -111,15 +111,16 @@ public class Controls {
 
     /**
      * A panel of controls to adjust the foreground and background colors of the
-     * {@code Graph}, as well as controls for rotation and animation.
+     * {@code Graph}, as well as controls for rotation, animation, reset and
+     * copy.
      *
      * @return a {@code Pane} containing value controls
      */
     public Pane createSettingsPane() {
         final ColorPicker bgPicker = createBackgroundPicker();
         final ColorPicker fgPicker = createForegroundPicker();
-        final CheckBox rotation = createRotateOrigin();
-        final CheckBox animation = createAnimation(Duration.seconds(30));
+        final ToggleButton rotation = createRotateOrigin();
+        final ToggleButton animation = createAnimation(Duration.seconds(30));
         final Button reset = createReset();
         final Button copy = createCopyButton();
         final VBox vBox = new VBox(8);
@@ -143,8 +144,8 @@ public class Controls {
         return fgPicker;
     }
 
-    private CheckBox createRotateOrigin() {
-        CheckBox rot = new CheckBox("Rotate origin:");
+    private ToggleButton createRotateOrigin() {
+        ToggleButton rot = new ToggleButton("Rotate origin");
         rot.setTooltip(new Tooltip("Rotate origin 180°."));
         rot.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         rot.setSelected(view.rotProperty().get());
@@ -152,7 +153,7 @@ public class Controls {
         return rot;
     }
 
-    private CheckBox createAnimation(Duration seconds) {
+    private ToggleButton createAnimation(Duration seconds) {
         animate.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
