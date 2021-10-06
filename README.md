@@ -6,4 +6,6 @@ To run the program from the command line, type:
 
     mvn clean javafx:run
 
+New in version 2.0:
+
 ![ModularApp.png](https://github.com/trashgod/modular/blob/master/ModularApp.png)
