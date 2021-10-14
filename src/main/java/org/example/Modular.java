@@ -2,8 +2,8 @@ package org.example;
 
 import javafx.scene.layout.Pane;
 
-/*
- * Methods implemented by a modular application.
+/**
+ * Methods implemented by a {@code Modular} application.
  */
 public interface Modular {
 

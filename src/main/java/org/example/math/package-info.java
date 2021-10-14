@@ -1,7 +1,5 @@
 /**
- * Modular Arithmetic Graph
- *
- * A JavaFX application that renders chords connecting points on a circle.
+ * Modular Arithmetic Graph: An application that renders chords connecting points on a circle.
  *
  * @see <a href="https://github.com/trashgod/modular/"><i>Modular Arithmetic
  * Graph on GitHub.</i></a>

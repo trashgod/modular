@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import org.example.math.ModularApp;
 
 /**
- * A home for modular applications.
+ * A home for {@code Modular} applications.
  */
 public class ModularHome extends Application {
 

@@ -8,6 +8,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <mainClass>org.example.ModularHome</mainClass>
     </properties>
     <dependencies>
         <dependency>
@@ -33,7 +34,7 @@
                 <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>org.example.ModularHome</mainClass>
+                                <mainClass>${mainClass}</mainClass>
                             </manifest>
                         </archive>
                 </configuration>
@@ -43,7 +44,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.6</version>
                 <configuration>
-                    <mainClass>org.example.ModularHome</mainClass>
+                    <mainClass>${mainClass}</mainClass>
                 </configuration>
                 <executions>
                     <execution>
