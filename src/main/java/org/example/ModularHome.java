@@ -21,7 +21,7 @@ public class ModularHome extends Application {
         tab.selectedProperty().addListener((var o) -> {
             stage.setTitle(module.getName());
             if (tab.getContent() == null) {
-                tab.setContent(module.createApp());
+                tab.setContent(module.createContent());
             }
         });
         tabpane.getTabs().add(tab);

@@ -16,7 +16,7 @@ import org.example.Modular;
 public class ModularApp extends Application implements Modular {
 
     @Override
-    public BorderPane createApp() {
+    public BorderPane createContent() {
         Graph model = new Graph();
         GraphView view = new GraphView(model);
         Controls controls = new Controls(model, view);
@@ -42,7 +42,7 @@ public class ModularApp extends Application implements Modular {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle(getName());
-        primaryStage.setScene(new Scene(createApp()));
+        primaryStage.setScene(new Scene(createContent()));
         primaryStage.show();
     }
 
