@@ -36,7 +36,7 @@ public class ModularApp extends Application implements Modular {
 
     @Override
     public String getShortName() {
-        return "Modular Graph";
+        return "Graph";
     }
 
     @Override

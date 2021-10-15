@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 import org.example.math.ModularApp;
 
@@ -18,6 +19,7 @@ public class ModularHome extends Application {
 
     private void createTab(Stage stage, Modular module) {
         Tab tab = new Tab(module.getShortName());
+        tab.setTooltip(new Tooltip(module.getName()));
         tab.selectedProperty().addListener((var o) -> {
             stage.setTitle(module.getName());
             if (tab.getContent() == null) {
