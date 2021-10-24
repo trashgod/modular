@@ -6,7 +6,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
@@ -150,14 +149,12 @@ public class Controls {
     private ToggleButton createRotateOrigin() {
         ToggleButton rot = new ToggleButton("Rotate origin");
         rot.setTooltip(new Tooltip("Rotate origin 180°."));
-        rot.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         rot.setSelected(view.rotProperty().get());
         view.rotProperty().bind(rot.selectedProperty());
         return rot;
     }
 
     private ToggleButton createAnimation(Duration seconds) {
-        animate.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
