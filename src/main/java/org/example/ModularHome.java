@@ -8,6 +8,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import org.example.math.HTreeApp;
 import org.example.math.ModularApp;
 
 /**
@@ -32,6 +33,7 @@ public class ModularHome extends Application {
     @Override
     public void start(Stage stage) {
         tabpane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        createTab(stage, new HTreeApp());
         createTab(stage, new ModularApp());
         Scene scene = new Scene(tabpane);
         stage.setScene(scene);
