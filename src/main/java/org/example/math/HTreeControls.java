@@ -27,20 +27,18 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
- * {@code Controls} that alter the properties of a {@code Graph} and its
- * {@code GraphView}.
+ * {@code Controls} that alter the properties of a {@code HTree} and its
+ * {@code HTreeView}.
  */
 public class HTreeControls {
 
-    private static final int MIN = 2;
-    private static final int MAX = 12;
     private final HTreeModel model;
     private final HTreeView view;
     // Some controls will be disabled during animation
     private final ToggleButton animate = new ToggleButton("Animate");
 
     /**
-     * Controls that alter a {@code Graph}.
+     * Controls that alter an {@code HTree}.
      *
      * @param model the {@code HTree} that the controls affect
      * @param view the {@code HTreeView} that the controls affect
@@ -52,7 +50,7 @@ public class HTreeControls {
 
     /**
      * A panel of controls to adjust the multiplier and number of points on the
-     * {@code Graph} using a {@code Spinner} and {@code Slider} for each.
+     * {@code HTree} using a {@code Spinner} and {@code Slider} for each.
      *
      * @see <a href="https://stackoverflow.com/a/55427307/230513"><i>Connecting
      * a Slider and Spinner…</i></a>
@@ -60,12 +58,13 @@ public class HTreeControls {
      * @return a {@code Pane} containing value controls
      */
     public Pane createValuesPane() {
-        Slider nSlider = new Slider(0, MAX, model.nProperty().get());
-        nSlider.setBlockIncrement(2);
+        Slider nSlider = new Slider(HTreeModel.MIN, HTreeModel.MAX, model.nProperty().get());
+        nSlider.setBlockIncrement(1);
+        nSlider.setMajorTickUnit(1);
+        nSlider.setSnapToTicks(true);
         nSlider.disableProperty().bind(animate.selectedProperty());
         model.nProperty().bindBidirectional(nSlider.valueProperty());
-        Spinner<Number> nSpinner = new Spinner<>(MIN, MAX, HTreeModel.ORDER / 2, 2);
-        nSpinner.setEditable(true);
+        Spinner<Number> nSpinner = new Spinner<>(HTreeModel.MIN, HTreeModel.MAX, HTreeModel.ORDER, 1);
         nSpinner.disableProperty().bind(animate.selectedProperty());
         model.nProperty().bindBidirectional(nSpinner.getValueFactory().valueProperty());
         Platform.runLater(nSpinner::requestFocus);
@@ -90,7 +89,7 @@ public class HTreeControls {
      * @return a {@code Label} containing a message.
      */
     public Label createStatusPane() {
-        String greet = "Adjust the controls below to change the graph.";
+        String greet = "Adjust the controls below to change the tree.";
         String alert = "Some controls are disabled during animation.";
         Label label = new Label(greet);
         animate.selectedProperty().addListener(
@@ -100,7 +99,7 @@ public class HTreeControls {
 
     /**
      * A panel of controls to adjust the foreground and background colors of the
-     * {@code Graph}, as well as controls for rotation, animation, reset and
+     * {@code HTree}, as well as controls for rotation, animation, reset and
      * copy.
      *
      * @return a {@code Pane} containing value controls
@@ -126,7 +125,7 @@ public class HTreeControls {
     }
 
     private ColorPicker createc2Picker() {
-        ColorPicker c2Picker = new ColorPicker(view.c1Property().get());
+        ColorPicker c2Picker = new ColorPicker(view.c2Property().get());
         c2Picker.setTooltip(new Tooltip("Second color."));
         view.c2Property().bindBidirectional(c2Picker.valueProperty());
         c2Picker.disableProperty().bind(animate.selectedProperty());
@@ -145,7 +144,7 @@ public class HTreeControls {
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        KeyValue nKV = new KeyValue(model.nProperty(), MAX);
+        KeyValue nKV = new KeyValue(model.nProperty(), HTreeModel.MAX);
         KeyFrame nKF = new KeyFrame(seconds, nKV);
         timeline.getKeyFrames().addAll(nKF);
         animate.selectedProperty().addListener((o) -> {

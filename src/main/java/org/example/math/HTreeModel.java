@@ -9,9 +9,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class HTreeModel {
 
     /**
+     * Minimum order.
+     */
+    public static final int MIN = 0;
+    /**
+     * Maximum order.
+     */
+    public static final int MAX = 9;
+    /**
      * Default order.
      */
-    public static final int ORDER = 10;
+    public static final int ORDER = 4;
     private final IntegerProperty n = new SimpleIntegerProperty(ORDER);
 
     /**
