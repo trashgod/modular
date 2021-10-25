@@ -121,6 +121,7 @@ public class HTreeControls {
         ColorPicker c1Picker = new ColorPicker(view.c1Property().get());
         c1Picker.setTooltip(new Tooltip("First color."));
         view.c1Property().bindBidirectional(c1Picker.valueProperty());
+        c1Picker.disableProperty().bind(animate.selectedProperty());
         return c1Picker;
     }
 
@@ -144,8 +145,9 @@ public class HTreeControls {
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        KeyValue nKV = new KeyValue(model.nProperty(), HTreeModel.MAX);
-        KeyFrame nKF = new KeyFrame(seconds, nKV);
+        KeyValue nMin = new KeyValue(model.nProperty(), HTreeModel.MIN);
+        KeyValue nMax = new KeyValue(model.nProperty(), HTreeModel.MAX);
+        KeyFrame nKF = new KeyFrame(seconds, nMin, nMax);
         timeline.getKeyFrames().addAll(nKF);
         animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
