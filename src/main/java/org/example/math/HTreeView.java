@@ -37,7 +37,7 @@ public class HTreeView extends Pane {
     private final IntegerProperty n;
     private final Canvas canvas = new Canvas();
     private final InvalidationListener listener = (o) -> update();
-    
+
     public HTreeView(HTreeModel model) {
         this.n = model.nProperty();
         this.getChildren().add(canvas);
@@ -52,15 +52,17 @@ public class HTreeView extends Pane {
         this.n.addListener(listener);
         update();
     }
-    
+
     private void draw(GraphicsContext g, int n, double sz, double x, double y) {
         if (n == 0) {
             return;
         }
         g.setStroke(c1.get());
-        g.setLineWidth(n);
-        g.setLineCap(StrokeLineCap.BUTT);
-        g.setLineJoin(StrokeLineJoin.MITER);
+        if (stroke.get()) {
+            g.setLineWidth(n);
+            g.setLineCap(StrokeLineCap.BUTT);
+            g.setLineJoin(StrokeLineJoin.MITER);
+        }
         double x0 = x - sz / 2, x1 = x + sz / 2;
         double y0 = y - sz / 2, y1 = y + sz / 2;
         // draw the 3 line segments of the H 
@@ -73,7 +75,7 @@ public class HTreeView extends Pane {
         draw(g, n - 1, sz / 2, x1, y0);
         draw(g, n - 1, sz / 2, x1, y1);
     }
-    
+
     private void update() {
         // clear canvas; connect every m points around a circle with lines
         GraphicsContext g = canvas.getGraphicsContext2D();

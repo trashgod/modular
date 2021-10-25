@@ -77,7 +77,7 @@ public class HTreeControls {
         grid.addRow(1, nBox);
         ColumnConstraints sc = new ColumnConstraints(Slider.USE_COMPUTED_SIZE,
             Slider.USE_COMPUTED_SIZE, Double.MAX_VALUE, Priority.ALWAYS, null, true);
-        grid.getColumnConstraints().addAll(sc, sc);
+        grid.getColumnConstraints().addAll(sc);
         grid.setPadding(new Insets(8, 8, 8, 8));
         grid.setHgap(4);
         grid.setVgap(4);
@@ -108,8 +108,8 @@ public class HTreeControls {
     public Pane createSettingsPane() {
         final ColorPicker c1Picker = createC1Picker();
         final ColorPicker c2Picker = createc2Picker();
-        final ToggleButton stroke = createRotateOrigin();
-        final ToggleButton animation = createAnimation(Duration.seconds(30));
+        final ToggleButton stroke = createStroke();
+        final ToggleButton animation = createAnimation(Duration.seconds(2));
         final Button reset = createReset();
         final Button copy = createCopyButton();
         final VBox vBox = new VBox(8);
@@ -133,21 +133,21 @@ public class HTreeControls {
         return c2Picker;
     }
 
-    private ToggleButton createRotateOrigin() {
-        ToggleButton rot = new ToggleButton("Rotate origin");
-        rot.setTooltip(new Tooltip("Rotate origin 180°."));
-        rot.setSelected(view.strokeProperty().get());
-        view.strokeProperty().bind(rot.selectedProperty());
-        return rot;
+    private ToggleButton createStroke() {
+        ToggleButton vary = new ToggleButton("Vary stroke");
+        vary.setTooltip(new Tooltip("Vary stroke by order."));
+        vary.setSelected(view.strokeProperty().get());
+        view.strokeProperty().bind(vary.selectedProperty());
+        return vary;
     }
 
     private ToggleButton createAnimation(Duration seconds) {
         final Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setAutoReverse(true);
-        KeyValue mKV = new KeyValue(model.nProperty(), MAX);
-        KeyFrame mKF = new KeyFrame(seconds, mKV);
-        timeline.getKeyFrames().addAll(mKF);
+        KeyValue nKV = new KeyValue(model.nProperty(), MAX);
+        KeyFrame nKF = new KeyFrame(seconds, nKV);
+        timeline.getKeyFrames().addAll(nKF);
         animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
                 timeline.play();
