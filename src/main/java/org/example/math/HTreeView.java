@@ -2,7 +2,6 @@ package org.example.math;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,11 +22,11 @@ public class HTreeView extends Pane {
     /**
      * Default first color
      */
-    public static final Color c1Color = Color.RED;
+    public static final Color c1Color = Color.hsb(60, 1, 1);
     /**
      * Default second color
      */
-    public static final Color c2Color = Color.BLUE;
+    public static final Color c2Color = Color.hsb(300, 1, 1);
     private static final double WIDTH = 500;
     private static final double HEIGHT = 500;
     private final ObjectProperty<Color> c1 = new SimpleObjectProperty<>(c1Color);
@@ -81,7 +80,7 @@ public class HTreeView extends Pane {
         GraphicsContext g = canvas.getGraphicsContext2D();
         double w = this.getWidth();
         double h = this.getHeight();
-        g.setFill(Color.WHITE);
+        g.setFill(Color.BLACK);
         g.fillRect(0, 0, w, h);
         draw(g, model.nProperty().get(), getWidth() / 2, getWidth() / 2, getHeight() / 2);
     }
