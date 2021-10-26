@@ -121,7 +121,6 @@ public class HTreeControls {
         ColorPicker c1Picker = new ColorPicker(view.c1Property().get());
         c1Picker.setTooltip(new Tooltip("First color."));
         view.c1Property().bindBidirectional(c1Picker.valueProperty());
-        c1Picker.disableProperty().bind(animate.selectedProperty());
         return c1Picker;
     }
 
@@ -129,7 +128,6 @@ public class HTreeControls {
         ColorPicker c2Picker = new ColorPicker(view.c2Property().get());
         c2Picker.setTooltip(new Tooltip("Second color."));
         view.c2Property().bindBidirectional(c2Picker.valueProperty());
-        c2Picker.disableProperty().bind(animate.selectedProperty());
         return c2Picker;
     }
 
