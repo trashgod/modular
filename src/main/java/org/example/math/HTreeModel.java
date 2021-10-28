@@ -12,10 +12,12 @@ public class HTreeModel {
      * Minimum order.
      */
     public static final int MIN = 0;
+
     /**
      * Maximum order.
      */
     public static final int MAX = 9;
+ 
     /**
      * Default order.
      */
@@ -23,7 +25,7 @@ public class HTreeModel {
     private final IntegerProperty n = new SimpleIntegerProperty(ORDER);
 
     /**
-     * @return this graph's number of levels property
+     * @return this tree's number of levels property
      */
     public IntegerProperty nProperty() {
         return n;

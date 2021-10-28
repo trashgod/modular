@@ -15,9 +15,11 @@ public class Graph {
      * Default number of points
      */
     public static final int POINTS = 128;
+
     /**
      * Default multiplier
      */
+
     public static final double MULTIPLIER = 2.0;
     private final IntegerProperty p = new SimpleIntegerProperty(POINTS);
     private final DoubleProperty m = new SimpleDoubleProperty(MULTIPLIER);
