@@ -22,9 +22,11 @@ public class ModularHome extends Application {
         Tab tab = new Tab(module.getShortName());
         tab.setTooltip(new Tooltip(module.getName()));
         tab.selectedProperty().addListener((var o) -> {
-            stage.setTitle(module.getName());
-            if (tab.getContent() == null) {
-                tab.setContent(module.createContent());
+            if (tab.isSelected()) {
+                stage.setTitle(module.getName());
+                if (tab.getContent() == null) {
+                    tab.setContent(module.createContent());
+                }
             }
         });
         tabpane.getTabs().add(tab);
