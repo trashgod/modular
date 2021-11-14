@@ -37,6 +37,11 @@ public class GraphView extends Pane {
     private final Canvas canvas = new Canvas();
     private final InvalidationListener listener = (o) -> update();
 
+    /**
+     * A {@code Pane} that renders a view of a {@code Graph}.
+     * 
+     * @param graph the model displayed by this view 
+     */
     public GraphView(Graph graph) {
         this.graph = graph;
         this.getChildren().add(canvas);

@@ -17,12 +17,18 @@ public class HTreeModel {
      * Maximum order.
      */
     public static final int MAX = 9;
- 
+
     /**
      * Default order.
      */
     public static final int ORDER = 4;
     private final IntegerProperty n = new SimpleIntegerProperty(ORDER);
+
+    /**
+     * An {@code HTree} model of order <i>n</i>.
+     */
+    public HTreeModel() {
+    }
 
     /**
      * @return this tree's number of levels property

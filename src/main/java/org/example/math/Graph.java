@@ -19,11 +19,14 @@ public class Graph {
     /**
      * Default multiplier
      */
-
     public static final double MULTIPLIER = 2.0;
+
     private final IntegerProperty p = new SimpleIntegerProperty(POINTS);
     private final DoubleProperty m = new SimpleDoubleProperty(MULTIPLIER);
 
+    /**
+     * A {@code Graph} that models chords connecting points on a circle.
+     */
     public Graph() {
     }
 

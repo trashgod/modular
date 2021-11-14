@@ -36,6 +36,11 @@ public class HTreeView extends Pane {
     private final Canvas canvas = new Canvas();
     private final InvalidationListener listener = (o) -> update();
 
+    /**
+     * A {@code Pane} that renders a view of an {@code HTree}.
+     * 
+     * @param model the model rendered by this view
+     */
     public HTreeView(HTreeModel model) {
         this.model = model;
         this.getChildren().add(canvas);
