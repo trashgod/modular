@@ -8,7 +8,7 @@ To run the program from the command line, type:
 
 ## HTree
 
-A *modular* application that displays an [`HTree`](https://en.wikipedia.org/wiki/H_tree) along with control to for depth, stroke, color and animation.
+A *modular* application that displays an [`HTree`](https://en.wikipedia.org/wiki/H_tree) along with control for depth, stroke, color and animation.
 
 ## Modular Arithmetic Graph
 
