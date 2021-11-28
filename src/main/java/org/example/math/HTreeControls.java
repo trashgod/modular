@@ -147,6 +147,7 @@ public class HTreeControls {
         KeyValue nMax = new KeyValue(model.nProperty(), HTreeModel.MAX);
         KeyFrame nKF = new KeyFrame(seconds, nMin, nMax);
         timeline.getKeyFrames().addAll(nKF);
+        animate.setTooltip(new Tooltip("Toggle animation."));
         animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
                 timeline.play();

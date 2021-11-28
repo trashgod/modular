@@ -165,6 +165,7 @@ public class Controls {
         KeyFrame pKF = new KeyFrame(seconds, pKV);
         KeyFrame fgKF = new KeyFrame(seconds, fgKV);
         timeline.getKeyFrames().addAll(mKF, pKF, fgKF);
+        animate.setTooltip(new Tooltip("Toggle animation."));
         animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
                 timeline.play();
