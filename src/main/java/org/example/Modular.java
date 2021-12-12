@@ -9,6 +9,9 @@ import javafx.scene.Node;
  */
 public interface Modular {
 
+    public static final double WIDTH = 500;
+    public static final double HEIGHT = 500;
+
     /**
      * @return the {@code Modular} application's content
      */

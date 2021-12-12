@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import org.example.Modular;
 
 /**
  * A {@code Pane} that renders a view of a {@code Graph}.
@@ -27,8 +28,6 @@ public class GraphView extends Pane {
      * Default foreground color
      */
     public static final Color fgColor = Color.CYAN;
-    private static final double WIDTH = 500;
-    private static final double HEIGHT = 500;
     private static final int INSET = 8;
     private final ObjectProperty<Color> bg = new SimpleObjectProperty<>(bgColor);
     private final ObjectProperty<Color> fg = new SimpleObjectProperty<>(fgColor);
@@ -45,7 +44,7 @@ public class GraphView extends Pane {
     public GraphView(Graph graph) {
         this.graph = graph;
         this.getChildren().add(canvas);
-        this.setPrefSize(WIDTH, HEIGHT);
+        this.setPrefSize(Modular.WIDTH, Modular.HEIGHT);
         this.canvas.widthProperty().bind(this.widthProperty());
         this.canvas.heightProperty().bind(this.heightProperty());
         this.widthProperty().addListener(listener);

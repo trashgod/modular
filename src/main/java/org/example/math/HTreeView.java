@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
+import org.example.Modular;
 
 /**
  * A {@code Pane} that renders a view of an {@code HTree}.
@@ -27,8 +28,6 @@ public class HTreeView extends Pane {
      * Default second color
      */
     public static final Color c2Color = Color.hsb(300, 1, 1);
-    private static final double WIDTH = 500;
-    private static final double HEIGHT = 500;
     private final ObjectProperty<Color> c1 = new SimpleObjectProperty<>(c1Color);
     private final ObjectProperty<Color> c2 = new SimpleObjectProperty<>(c2Color);
     private final BooleanProperty stroke = new SimpleBooleanProperty(true);
@@ -44,7 +43,7 @@ public class HTreeView extends Pane {
     public HTreeView(HTreeModel model) {
         this.model = model;
         this.getChildren().add(canvas);
-        this.setPrefSize(WIDTH, HEIGHT);
+        this.setPrefSize(Modular.WIDTH, Modular.HEIGHT);
         this.canvas.widthProperty().bind(this.widthProperty());
         this.canvas.heightProperty().bind(this.heightProperty());
         this.widthProperty().addListener(listener);
