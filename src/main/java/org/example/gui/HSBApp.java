@@ -34,6 +34,9 @@ public class HSBApp extends Application implements Modular {
     private final HSBModel model = new HSBModel(Color.RED);
     private final HSBPane pane = new HSBPane(model);
 
+    /**
+     * A selection of quickly accessible hues.
+     */
     public enum Hue {
         Red, Yellow, Lime, Cyan, Blue, Magenta;
     }
@@ -125,7 +128,6 @@ public class HSBApp extends Application implements Modular {
 
     @Override
     public void start(Stage primaryStage) {
-//        primaryStage.setTitle(getName());
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.show();
     }

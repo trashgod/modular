@@ -12,6 +12,7 @@ import org.example.Modular;
  * {@code HTreeControls}.
  *
  * @see <a href="https://en.wikipedia.org/wiki/H_tree"><i>H Tree</i>.</a>
+ * @see <a href="https://stackoverflow.com/q/37449686/230513"><i>Beginner Swing recursion</i>.</a>
  */
 public class HTreeApp extends Application implements Modular {
 

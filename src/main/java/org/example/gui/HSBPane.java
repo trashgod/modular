@@ -7,9 +7,9 @@ import javafx.scene.shape.Rectangle;
 import org.example.Modular;
 
 /**
- *
+ * A view of a color swatch bound to an {@code ObjectProperty<Color>}. 
  */
-final class HSBPane extends Pane {
+public final class HSBPane extends Pane {
 
         private static final int CROSS_SIZE = 8;
         private static final Color CROSS_COLOR = Color.WHITE;

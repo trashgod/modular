@@ -8,9 +8,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Color;
 
 /**
- *
+ * A model holding HSB color properties, hue, saturation, brightness and color. 
  */
-final class HSBModel {
+public final class HSBModel {
 
     private final Color initialColor;
     private final ObjectProperty<Color> c = new SimpleObjectProperty<>();
