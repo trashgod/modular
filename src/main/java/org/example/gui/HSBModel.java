@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.paint.Color;
 
 /**
- * A model holding HSB color properties, hue, saturation, brightness and color. 
+ * A model holding HSB color properties, hue, saturation, brightness, opacity and color.
  */
 public final class HSBModel {
 
@@ -17,8 +17,9 @@ public final class HSBModel {
     private final DoubleProperty h = new SimpleDoubleProperty();
     private final DoubleProperty s = new SimpleDoubleProperty();
     private final DoubleProperty b = new SimpleDoubleProperty();
+    private final DoubleProperty a = new SimpleDoubleProperty();
     private final InvalidationListener listener = (o) -> {
-        c.set(Color.hsb(h.get(), s.get(), b.get()));
+        c.set(Color.hsb(h.get(), s.get(), b.get(), a.get()));
     };
 
     public HSBModel(Color color) {
@@ -27,12 +28,14 @@ public final class HSBModel {
         h.addListener(listener);
         s.addListener(listener);
         b.addListener(listener);
+        a.addListener(listener);
     }
 
     public void setColor(Color c) {
         h.set(c.getHue());
         s.set(c.getSaturation());
         b.set(c.getBrightness());
+        a.set(c.getOpacity());
     }
 
     public Color getInitialColor() {
@@ -53,5 +56,9 @@ public final class HSBModel {
 
     public DoubleProperty bProperty() {
         return b;
+    }
+
+    public DoubleProperty aProperty() {
+        return a;
     }
 }
