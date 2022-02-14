@@ -29,8 +29,11 @@ public class GraphView extends Pane {
      */
     public static final Color fgColor = Color.CYAN;
     private static final int INSET = 8;
+    /** This graph's background color property. */
     private final ObjectProperty<Color> bg = new SimpleObjectProperty<>(bgColor);
+    /** This graph's foreground color property. */
     private final ObjectProperty<Color> fg = new SimpleObjectProperty<>(fgColor);
+    /** This graph's rotated property. */
     private final BooleanProperty rot = new SimpleBooleanProperty(true);
     private final Graph graph;
     private final Canvas canvas = new Canvas();
@@ -82,23 +85,14 @@ public class GraphView extends Pane {
         }
     }
 
-    /**
-     * @return this graph's background color property
-     */
     public ObjectProperty<Color> bgProperty() {
         return bg;
     }
 
-    /**
-     * @return this graph's foreground color property
-     */
     public ObjectProperty<Color> fgProperty() {
         return fg;
     }
 
-    /**
-     * @return this graph's rotated property
-     */
     public BooleanProperty rotProperty() {
         return rot;
     }

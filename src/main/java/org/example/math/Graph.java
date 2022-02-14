@@ -21,7 +21,9 @@ public class Graph {
      */
     public static final double MULTIPLIER = 2.0;
 
+    /** The number of points in this Graph. */
     private final IntegerProperty p = new SimpleIntegerProperty(POINTS);
+    /** The multiplier used to connect points on this Graph. */
     private final DoubleProperty m = new SimpleDoubleProperty(MULTIPLIER);
 
     /**
@@ -30,16 +32,10 @@ public class Graph {
     public Graph() {
     }
 
-    /**
-     * @return this graph's number of points property
-     */
     public IntegerProperty pProperty() {
         return p;
     }
 
-    /**
-     * @return this graph's multiplier property
-     */
     public DoubleProperty mProperty() {
         return m;
     }

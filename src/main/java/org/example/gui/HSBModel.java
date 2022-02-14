@@ -13,10 +13,15 @@ import javafx.scene.paint.Color;
 public final class HSBModel {
 
     private final Color initialColor;
+    /** The current color. */
     private final ObjectProperty<Color> c = new SimpleObjectProperty<>();
+    /** Hue of the current color. */
     private final DoubleProperty h = new SimpleDoubleProperty();
+    /** Saturation of the current color. */
     private final DoubleProperty s = new SimpleDoubleProperty();
+    /** Brightness of the current color. */
     private final DoubleProperty b = new SimpleDoubleProperty();
+    /** Alpha (opacity) of the current color. */
     private final DoubleProperty a = new SimpleDoubleProperty();
     private final InvalidationListener listener = (o) -> {
         c.set(Color.hsb(h.get(), s.get(), b.get(), a.get()));

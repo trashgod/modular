@@ -22,6 +22,9 @@ public class HTreeModel {
      * Default order.
      */
     public static final int ORDER = 4;
+    /**
+     * Order of this HTree.
+     */
     private final IntegerProperty n = new SimpleIntegerProperty(ORDER);
 
     /**
@@ -30,9 +33,6 @@ public class HTreeModel {
     public HTreeModel() {
     }
 
-    /**
-     * @return this tree's number of levels property
-     */
     public IntegerProperty nProperty() {
         return n;
     }

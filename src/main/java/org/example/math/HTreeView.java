@@ -28,8 +28,11 @@ public class HTreeView extends Pane {
      * Default second color
      */
     public static final Color c2Color = Color.hsb(300, 1, 1);
+    /** This tree's first Color property */
     private final ObjectProperty<Color> c1 = new SimpleObjectProperty<>(c1Color);
+    /** This tree's second Color property */
     private final ObjectProperty<Color> c2 = new SimpleObjectProperty<>(c2Color);
+    /** This tree's Stroke property */
     private final BooleanProperty stroke = new SimpleBooleanProperty(true);
     private final HTreeModel model;
     private final Canvas canvas = new Canvas();
@@ -89,23 +92,14 @@ public class HTreeView extends Pane {
         draw(g, model.nProperty().get(), getWidth() / 2, getWidth() / 2, getHeight() / 2);
     }
 
-    /**
-     * @return this tree's first color property
-     */
     public ObjectProperty<Color> c1Property() {
         return c1;
     }
 
-    /**
-     * @return this tree's second color property
-     */
     public ObjectProperty<Color> c2Property() {
         return c2;
     }
 
-    /**
-     * @return this tree's stroke property
-     */
     public BooleanProperty strokeProperty() {
         return stroke;
     }
