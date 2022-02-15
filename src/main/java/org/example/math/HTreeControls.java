@@ -145,8 +145,8 @@ public class HTreeControls {
         timeline.setAutoReverse(true);
         KeyValue nMin = new KeyValue(model.nProperty(), HTreeModel.MIN);
         KeyValue nMax = new KeyValue(model.nProperty(), HTreeModel.MAX);
-        KeyFrame nKF = new KeyFrame(seconds, nMin, nMax);
-        timeline.getKeyFrames().addAll(nKF);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0), nMin));
+        timeline.getKeyFrames().add(new KeyFrame(seconds, nMax));
         animate.setTooltip(new Tooltip("Toggle animation."));
         animate.selectedProperty().addListener((o) -> {
             if (animate.isSelected()) {
