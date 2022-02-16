@@ -95,19 +95,19 @@ public class HSBApp extends Application implements Modular {
     private Pane createControlPane() {
         Slider hSlider = new Slider(0, 360, model.hProperty().get());
         model.hProperty().bindBidirectional(hSlider.valueProperty());
-        Spinner hSpinner = new Spinner(0, 360, model.hProperty().get());
+        Spinner<Number> hSpinner = new Spinner<>(0, 360, model.hProperty().get());
         model.hProperty().bindBidirectional(hSpinner.getValueFactory().valueProperty());
 
         Slider sSlider = new Slider(0, 1, model.sProperty().get());
         sSlider.setBlockIncrement(0.1);
         model.sProperty().bindBidirectional(sSlider.valueProperty());
-        Spinner sSpinner = new Spinner(0, 1, model.sProperty().get(), 0.1);
+        Spinner<Number> sSpinner = new Spinner<>(0, 1, model.sProperty().get(), 0.1);
         model.sProperty().bindBidirectional(sSpinner.getValueFactory().valueProperty());
 
         Slider bSlider = new Slider(0, 1, model.bProperty().get());
         bSlider.setBlockIncrement(0.1);
         model.bProperty().bindBidirectional(bSlider.valueProperty());
-        Spinner bSpinner = new Spinner(0, 1, model.bProperty().get(), 0.1);
+        Spinner<Number> bSpinner = new Spinner<>(0, 1, model.bProperty().get(), 0.1);
         model.bProperty().bindBidirectional(bSpinner.getValueFactory().valueProperty());
 
         model.setColor(model.getInitialColor());
