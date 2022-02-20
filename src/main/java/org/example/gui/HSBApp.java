@@ -135,5 +135,4 @@ public class HSBApp extends Application implements Modular {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
