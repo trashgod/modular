@@ -6,6 +6,10 @@ To run the program from the command line, type:
 
     mvn clean javafx:run
 
+## Blend Mode Application
+
+A `Modular` JavaFX application with controls to select colors and examine the effect of the selected JavaFX [`BlendMode`](https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/effect/BlendMode.html). A similar example is discussed [here](https://stackoverflow.com/q/70085482/230513); more [here](https://stackoverflow.com/search?tab=votes&q=%5bjavafx%5d%20BlendMode).
+
 ## HSB Application
 
 A `Modular` JavaFX application with controls that select a color and adjust the hue, saturation and brightness of a color swatch in the [`HSB`](https://en.wikipedia.org/wiki/HSL_and_HSV) color model.
