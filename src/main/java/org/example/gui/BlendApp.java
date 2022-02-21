@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.BorderPane;
@@ -61,9 +62,13 @@ public class BlendApp extends Application implements Modular {
         return buttonBox;
     }
 
-    private Label createDescriptionPane() {
-        Label label = new Label(model.textProperty().get());
-        return label;
+    private ScrollPane createDescriptionPane() {
+        Label label = new Label();
+        ScrollPane scrollPane = new ScrollPane(label);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setPadding(new Insets(8, 8, 8, 8));
+        label.textProperty().bind(model.textProperty());
+        return scrollPane;
     }
 
     @Override

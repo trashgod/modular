@@ -1,5 +1,8 @@
 package org.example.gui;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,6 +31,22 @@ public class BlendModel {
      * The current BlendMode description.
      */
     private final StringProperty text = new SimpleStringProperty("Description.");
+    private static final Properties glossary = new Properties();
+
+    public BlendModel() {
+        ClassLoader loader = this.getClass().getClassLoader();
+        InputStream in = loader.getResourceAsStream("mode.properties");
+        try {
+            glossary.load(in);
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+        mode.addListener((o) -> {
+            BlendMode m = mode.get();
+            String s = glossary.getProperty(m.name(), m.name());
+            text.set(s);
+        });
+    }
 
     public ObjectProperty<BlendMode> modeProperty() {
         return mode;
