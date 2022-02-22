@@ -127,6 +127,7 @@ public class Controls {
         final Button copy = createCopyButton();
         final VBox vBox = new VBox(8);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(8, 8, 8, 8));
         vBox.getChildren().addAll(bgPicker, fgPicker, rotation, animation, reset, copy);
         return vBox;
     }
