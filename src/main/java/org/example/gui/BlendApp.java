@@ -64,7 +64,7 @@ public class BlendApp extends Application implements Modular {
 
     private TextArea createDescriptionPane() {
         TextArea text = new TextArea();
-        text.setPrefRowCount(2);
+        text.setPrefRowCount(3);
         text.setEditable(false);
         text.setWrapText(true);
         text.setStyle("-fx-font-family: serif; -fx-font-size: 16;");

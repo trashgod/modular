@@ -35,7 +35,7 @@ public class BlendModel {
 
     public BlendModel() {
         ClassLoader loader = this.getClass().getClassLoader();
-        InputStream in = loader.getResourceAsStream("mode.properties");
+        InputStream in = loader.getResourceAsStream("org/example/gui/mode.properties");
         try {
             glossary.load(in);
         } catch (IOException e) {
