@@ -41,6 +41,7 @@ public class ModularHome extends Application {
         createTab(stage, new HSBApp());
         createTab(stage, new HTreeApp());
         createTab(stage, new ModularApp());
+        createTab(stage, new AboutApp());
         Scene scene = new Scene(tabpane);
         stage.setScene(scene);
         stage.show();
