@@ -32,7 +32,7 @@ public class HTreeApp extends Application implements Modular {
 
     @Override
     public String getName() {
-        return "HTree";
+        return "HTree Application";
     }
 
     @Override

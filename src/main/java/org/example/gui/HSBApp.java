@@ -43,7 +43,7 @@ public class HSBApp extends Application implements Modular {
 
     @Override
     public String getName() {
-        return "HSB Application";
+        return "Hue, Saturation, Brightness Application";
     }
 
     @Override
