@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -37,12 +36,13 @@ public class AboutApp extends Application implements Modular {
         Text title = new Text("Modular Home");
         title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
             + "-fx-font-style: oblique; -fx-font-weight: bold");
-        Label label = new Label(
+        Text version = new Text(
             System.getProperty("os.name")
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
-        VBox box = new VBox(PADDING, title, label);
+        version.setStyle("-fx-font-family: serif; -fx-font-size: 16");
+        VBox box = new VBox(PADDING, title, version);
         box.setPadding(new Insets(PADDING));
         box.setAlignment(Pos.CENTER);
         return box;
