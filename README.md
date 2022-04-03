@@ -10,13 +10,19 @@ To run the program from the command line, type:
 
 A `Modular` JavaFX application with controls to select colors and examine the effect of the selected JavaFX [`BlendMode`](https://openjfx.io/javadoc/17/javafx.graphics/javafx/scene/effect/BlendMode.html). A similar example is discussed [here](https://stackoverflow.com/q/70085482/230513); more [here](https://stackoverflow.com/search?tab=votes&q=%5bjavafx%5d%20BlendMode).
 
+![BlendApp.png](images/BlendApp.png)
+
 ## HSB Application
 
 A `Modular` JavaFX application with controls that select a color and adjust the hue, saturation and brightness of a color swatch in the [`HSB`](https://en.wikipedia.org/wiki/HSL_and_HSV) color model.
 
+![HSBApp.png](images/HSBApp.png)
+
 ## HTree Application 
 
 A `Modular` JavaFX application that displays an [`HTree`](https://en.wikipedia.org/wiki/H_tree) along with control for depth, stroke, color and animation.
+
+![HTreeApp.png](images/HTreeApp.png)
 
 ## Modular Arithmetic Graph
 
