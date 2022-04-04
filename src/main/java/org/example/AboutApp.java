@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -34,15 +35,17 @@ public class AboutApp extends Application implements Modular {
     @Override
     public Node createContent() {
         Text title = new Text("Modular Home");
-        title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
-            + "-fx-font-style: oblique; -fx-font-weight: bold");
         Text version = new Text(
             System.getProperty("os.name")
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
         version.setStyle("-fx-font-family: serif; -fx-font-size: 16");
-        VBox box = new VBox(PADDING, title, version);
+        title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
+            + "-fx-font-style: oblique; -fx-font-weight: bold");
+        Hyperlink link = new Hyperlink("https://github.com/trashgod/modular");
+        link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
+        VBox box = new VBox(PADDING, title, version, link);
         box.setPadding(new Insets(PADDING));
         box.setAlignment(Pos.CENTER);
         return box;
