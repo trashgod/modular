@@ -65,10 +65,11 @@ public class BlendApp extends Application implements Modular {
         copyButton.setOnAction(t -> view.copyImage());
         buttonBox.getChildren().add(copyButton);
         TextField text = new TextField();
+        text.setPrefColumnCount(8);
         text.setAlignment(Pos.CENTER);
         text.setEditable(false);
         text.textProperty().bind(view.argbProperty());
-        buttonBox.getChildren().add(new Label("ARGB at mouse:"));
+        buttonBox.getChildren().add(new Label("ARGB at pointer…"));
         buttonBox.getChildren().add(text);
         buttonBox.setPadding(new Insets(8, 8, 8, 8));
         return buttonBox;

@@ -13,7 +13,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import org.example.Modular;
 
 /**
@@ -22,7 +21,10 @@ import org.example.Modular;
 public final class BlendView extends Pane {
 
     private static final int S = 8;
-    private final StringProperty argbProperty = new SimpleStringProperty();
+    /**
+     * The {@code BlendMode} result at the pointer as an ARGB hex string.
+     */
+    private final StringProperty argb = new SimpleStringProperty();
     private final BlendModel model;
     private final Canvas canvas = new Canvas();
     private final InvalidationListener listener = (o) -> update();
@@ -45,18 +47,21 @@ public final class BlendView extends Pane {
         this.model.botProperty().addListener(listener);
         this.canvas.setOnMouseMoved(e -> {
             int aRGB = image.getPixelReader().getArgb((int) e.getX(), (int) e.getY());
-            argbProperty.set(Integer.toHexString(aRGB).toUpperCase());
+            argb.set(Integer.toHexString(aRGB).toUpperCase());
         });
-        this.canvas.setOnMouseExited(e -> argbProperty.set(""));
+        this.canvas.setOnMouseExited(e -> argb.set(""));
         Tooltip tooltip = new Tooltip();
         Tooltip.install(this.canvas, tooltip);
-        tooltip.textProperty().bind(argbProperty);
+        tooltip.textProperty().bind(argb);
     }
 
     public StringProperty argbProperty() {
-        return argbProperty;
+        return argb;
     }
 
+    /**
+     * Copy the current image to clipboard.
+     */
     public void copyImage() {
         Clipboard clipboard = Clipboard.getSystemClipboard();
         ClipboardContent content = new ClipboardContent();
@@ -86,6 +91,7 @@ public final class BlendView extends Pane {
         g.fillOval(w / 3, h / 6, 2 * w / 3, 2 * h / 3);
         g.setFill(model.topProperty().get());
         g.fillOval(0, h / 6, 2 * w / 3, 2 * h / 3);
+        // Update snapshot image.
         if (w > 0 && h > 0) {
             int wide = (int) w;
             int high = (int) h;
