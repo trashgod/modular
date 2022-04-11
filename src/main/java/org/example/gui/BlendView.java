@@ -1,6 +1,8 @@
 package org.example.gui;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.SnapshotParameters;
@@ -25,13 +27,17 @@ public final class BlendView extends Pane {
      * The {@code BlendMode} result at the pointer as an ARGB hex string.
      */
     private final StringProperty argb = new SimpleStringProperty();
+    /**
+     * Display a background pattern when true.
+     */
+    private final BooleanProperty pattern = new SimpleBooleanProperty(true);
     private final BlendModel model;
     private final Canvas canvas = new Canvas();
     private final InvalidationListener listener = (o) -> update();
     private final BlendMode mode = canvas.getGraphicsContext2D().getGlobalBlendMode();
     private final Color darkCol = Color.web("#c0c0c0");
     private final Color lightCol = Color.web("#404040");
-    private WritableImage image;
+    private WritableImage image = new WritableImage(1, 1);
 
     public BlendView(BlendModel model) {
         this.model = model;
@@ -45,6 +51,7 @@ public final class BlendView extends Pane {
         this.model.modeProperty().addListener(listener);
         this.model.topProperty().addListener(listener);
         this.model.botProperty().addListener(listener);
+        this.pattern.addListener(listener);
         this.canvas.setOnMouseMoved(e -> {
             int aRGB = image.getPixelReader().getArgb((int) e.getX(), (int) e.getY());
             argb.set(Integer.toHexString(aRGB).toUpperCase());
@@ -57,6 +64,10 @@ public final class BlendView extends Pane {
 
     public StringProperty argbProperty() {
         return argb;
+    }
+
+    public BooleanProperty patternProperty() {
+        return pattern;
     }
 
     /**
@@ -74,17 +85,22 @@ public final class BlendView extends Pane {
         double w = this.getWidth();
         double h = this.getHeight();
         g.setGlobalBlendMode(mode);
-        g.setFill(darkCol);
-        g.fillRect(0, 0, w, h);
-        g.setFill(lightCol);
-        double rows = h / S + 1;
-        double cols = w / S + 1;
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
-                if ((r + c) % 2 == 0) {
-                    g.fillRect(c * S, r * S, S, S);
+        if (pattern.get()) {
+            g.setFill(darkCol);
+            g.fillRect(0, 0, w, h);
+            g.setFill(lightCol);
+            double rows = h / S + 1;
+            double cols = w / S + 1;
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    if ((r + c) % 2 == 0) {
+                        g.fillRect(c * S, r * S, S, S);
+                    }
                 }
             }
+        } else {
+            g.setFill(Color.WHITE);
+            g.fillRect(0, 0, w, h);
         }
         g.setGlobalBlendMode(model.modeProperty().get());
         g.setFill(model.botProperty().get());
