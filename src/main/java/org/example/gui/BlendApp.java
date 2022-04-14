@@ -3,6 +3,7 @@ package org.example.gui;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -27,10 +28,10 @@ import org.example.Modular;
  * A {@code Modular} application illustrating available BlendModes.
  */
 public class BlendApp extends Application implements Modular {
-    
+
     private final BlendModel model = new BlendModel();
     private final BlendView view = new BlendView(model);
-    
+
     @Override
     public BorderPane createContent() {
         BorderPane root = new BorderPane();
@@ -39,7 +40,7 @@ public class BlendApp extends Application implements Modular {
         root.setBottom(createDescriptionPane());
         return root;
     }
-    
+
     private Pane createButtonPane() {
         VBox buttonBox = new VBox(8);
         buttonBox.setAlignment(Pos.CENTER);
@@ -61,9 +62,11 @@ public class BlendApp extends Application implements Modular {
         Platform.runLater(cb::requestFocus);
         buttonBox.getChildren().add(new Label("Select blend mode…"));
         buttonBox.getChildren().add(cb);
-        ToggleButton patternButton = new ToggleButton("Display pattern");
-        patternButton.setTooltip(new Tooltip("Display background pattern."));
+        ToggleButton patternButton = new ToggleButton("Show pattern");
+        patternButton.setTooltip(new Tooltip("Togle background pattern."));
         patternButton.setSelected(view.patternProperty().get());
+        patternButton.textProperty().bind(Bindings.when(patternButton
+            .selectedProperty()).then("Hide pattern").otherwise("Show pattern"));
         view.patternProperty().bind(patternButton.selectedProperty());
         buttonBox.getChildren().add(patternButton);
         Button copyButton = new Button("Copy");
@@ -80,7 +83,7 @@ public class BlendApp extends Application implements Modular {
         buttonBox.setPadding(new Insets(8, 8, 8, 8));
         return buttonBox;
     }
-    
+
     private TextArea createDescriptionPane() {
         TextArea text = new TextArea();
         text.setPrefRowCount(3);
@@ -91,23 +94,23 @@ public class BlendApp extends Application implements Modular {
         text.textProperty().bind(model.textProperty());
         return text;
     }
-    
+
     @Override
     public String getName() {
         return "Blend Mode Application";
     }
-    
+
     @Override
     public String getShortName() {
         return "Blend";
     }
-    
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.show();
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
