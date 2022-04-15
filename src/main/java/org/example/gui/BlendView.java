@@ -99,7 +99,7 @@ public final class BlendView extends Pane {
                 }
             }
         } else {
-            g.setFill(Color.WHITE);
+            g.setFill(Color.GRAY);
             g.fillRect(0, 0, w, h);
         }
         g.setGlobalBlendMode(model.modeProperty().get());
