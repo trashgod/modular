@@ -2,6 +2,7 @@ package org.example;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -29,6 +30,7 @@ public class ModularHome extends Application {
                 if (tab.getContent() == null) {
                     tab.setContent(module.createContent());
                 }
+                Platform.runLater(module.whenSelected());
             }
         });
         tabpane.getTabs().add(tab);

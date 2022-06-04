@@ -27,4 +27,15 @@ public interface Modular {
      * {@code Tab} title
      */
     public String getShortName();
+
+    /**
+     * @return an optional {@code Runnable} to be scheduled when the
+     * {@code Tab} is selected; the default does nothing.
+     */
+    default public Runnable whenSelected() {
+        return new Runnable() {
+            @Override
+            public void run() {}
+        };
+    }
 }
