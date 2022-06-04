@@ -1,15 +1,21 @@
 package org.example;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * About Modular Application
@@ -17,6 +23,9 @@ import javafx.stage.Stage;
 public class AboutApp extends Application implements Modular {
 
     private static final int PADDING = 32;
+    private static final int DROP_RADIUS = 24;
+    private DropShadow dropShadow;
+    private Timeline timeline;
 
     @Override
     public void start(Stage stage) {
@@ -28,32 +37,37 @@ public class AboutApp extends Application implements Modular {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
     public Node createContent() {
         Text title = new Text("Modular Home");
+        title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
+            + "-fx-font-style: oblique; -fx-font-weight: bold");
         Text version = new Text(
             System.getProperty("os.name")
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
         version.setStyle("-fx-font-family: serif; -fx-font-size: 16");
-        title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
-            + "-fx-font-style: oblique; -fx-font-weight: bold");
         Hyperlink link = new Hyperlink("https://github.com/trashgod/modular");
         link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
         VBox box = new VBox(PADDING, title, version, link);
         box.setPadding(new Insets(PADDING));
         box.setAlignment(Pos.CENTER);
+
+        dropShadow = new DropShadow();
+        dropShadow.setRadius(DROP_RADIUS);
+        dropShadow.setSpread(0.75);
+        title.setEffect(dropShadow);
+        timeline = new Timeline();
+        KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0);
+        KeyFrame k = new KeyFrame(new Duration(1000), r);
+        timeline.getKeyFrames().add(k);
         return box;
     }
 
     @Override
     public String getName() {
-        return "About Modular Applpication";
+        return "About Modular Application";
     }
 
     @Override
@@ -61,4 +75,17 @@ public class AboutApp extends Application implements Modular {
         return "About";
     }
 
+    @Override
+    public Runnable whenSelected() {
+        return this::animateDropShadow;
+    }
+
+    private void animateDropShadow() {
+        dropShadow.setRadius(DROP_RADIUS);
+        timeline.play();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
