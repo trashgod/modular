@@ -3,6 +3,7 @@ package org.example;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -19,9 +20,7 @@ import org.example.math.ModularApp;
  */
 public class ModularHome extends Application {
 
-    private final TabPane tabpane = new TabPane();
-
-    private void createTab(Stage stage, Modular module) {
+    private Tab createTab(Stage stage, Modular module) {
         Tab tab = new Tab(module.getShortName());
         tab.setTooltip(new Tooltip(module.getName()));
         tab.selectedProperty().addListener((var o) -> {
@@ -31,20 +30,24 @@ public class ModularHome extends Application {
                     tab.setContent(module.createContent());
                 }
                 Platform.runLater(module.whenSelected());
+            } else {
+                Platform.runLater(module.whenDeselected());
             }
         });
-        tabpane.getTabs().add(tab);
+        return tab;
     }
 
     @Override
     public void start(Stage stage) {
-        tabpane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        createTab(stage, new BlendApp());
-        createTab(stage, new HSBApp());
-        createTab(stage, new HTreeApp());
-        createTab(stage, new ModularApp());
-        createTab(stage, new AboutApp());
-        Scene scene = new Scene(tabpane);
+        TabPane tabPane = new TabPane();
+        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        ObservableList<Tab> list = tabPane.getTabs();
+        list.add(createTab(stage, new BlendApp()));
+        list.add(createTab(stage, new HSBApp()));
+        list.add(createTab(stage, new HTreeApp()));
+        list.add(createTab(stage, new ModularApp()));
+        list.add(createTab(stage, new AboutApp()));
+        Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();
     }
