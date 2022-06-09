@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -34,6 +35,7 @@ public class AboutApp extends Application implements Modular {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        Platform.runLater(whenSelected());
     }
 
     @Override
