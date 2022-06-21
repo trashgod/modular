@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,6 +14,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -24,8 +26,11 @@ public class AboutApp extends Application implements Modular {
 
     private static final int PADDING = 32;
     private static final int DROP_RADIUS = 24;
-    private DropShadow dropShadow;
-    private Timeline timeline;
+    private static final Color START_TITLE_COLOR = Color.SLATEBLUE;
+    private static final Color TARGET_TITLE_COLOR = Color.BLUE;
+    private final DropShadow dropShadow = new DropShadow();
+    private final Text title  = new Text("Modular Home"); 
+    private final Timeline timeline = new Timeline();
 
     @Override
     public void start(Stage stage) {
@@ -40,7 +45,6 @@ public class AboutApp extends Application implements Modular {
 
     @Override
     public Node createContent() {
-        Text title = new Text("Modular Home");
         title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
             + "-fx-font-style: oblique; -fx-font-weight: bold");
         Text version = new Text(
@@ -50,18 +54,19 @@ public class AboutApp extends Application implements Modular {
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
         version.setStyle("-fx-font-family: serif; -fx-font-size: 16");
         Hyperlink link = new Hyperlink("https://github.com/trashgod/modular");
+        link.setTextFill(TARGET_TITLE_COLOR);
         link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
         VBox box = new VBox(PADDING, title, version, link);
         box.setPadding(new Insets(PADDING));
         box.setAlignment(Pos.CENTER);
 
-        dropShadow = new DropShadow();
         dropShadow.setRadius(DROP_RADIUS);
         dropShadow.setSpread(0.75);
         title.setEffect(dropShadow);
-        timeline = new Timeline();
-        KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0);
-        KeyFrame k = new KeyFrame(new Duration(1000), r);
+        title.setFill(START_TITLE_COLOR);
+        KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0, Interpolator.EASE_OUT);
+        KeyValue c = new KeyValue(title.fillProperty(), TARGET_TITLE_COLOR, Interpolator.EASE_OUT);
+        KeyFrame k = new KeyFrame(new Duration(1000), c, r);
         timeline.getKeyFrames().add(k);
         return box;
     }
@@ -83,6 +88,7 @@ public class AboutApp extends Application implements Modular {
 
     private void animateDropShadow() {
         dropShadow.setRadius(DROP_RADIUS);
+        title.setFill(START_TITLE_COLOR);
         timeline.play();
     }
 
