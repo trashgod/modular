@@ -26,7 +26,7 @@ public class AboutApp extends Application implements Modular {
 
     private static final int PADDING = 32;
     private static final int DROP_RADIUS = 24;
-    private static final Color START_TITLE_COLOR = Color.SLATEBLUE;
+    private static final Color START_TITLE_COLOR = Color.NAVY;
     private static final Color TARGET_TITLE_COLOR = Color.BLUE;
     private final DropShadow dropShadow = new DropShadow();
     private final Text title  = new Text("Modular Home"); 
