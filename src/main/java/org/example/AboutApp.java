@@ -12,9 +12,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,8 +34,10 @@ public class AboutApp extends Application implements Modular {
     private static final int DROP_RADIUS = 24;
     private static final Color START_TITLE_COLOR = Color.NAVY;
     private static final Color TARGET_TITLE_COLOR = Color.BLUE;
+    private static final Color G1_COLOR = Color.LIGHTBLUE;
+    private static final Color G2_COLOR = Color.ALICEBLUE;
     private final DropShadow dropShadow = new DropShadow();
-    private final Text title  = new Text("Modular Home"); 
+    private final Text title = new Text("Modular Home");
     private final Timeline timeline = new Timeline();
 
     @Override
@@ -59,6 +67,9 @@ public class AboutApp extends Application implements Modular {
         VBox box = new VBox(PADDING, title, version, link);
         box.setPadding(new Insets(PADDING));
         box.setAlignment(Pos.CENTER);
+        Stop[] stops = new Stop[]{new Stop(0, G1_COLOR), new Stop(0.5, G2_COLOR), new Stop(1, G1_COLOR)};
+        LinearGradient lg = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
+        box.setBackground(new Background(new BackgroundFill(lg, CornerRadii.EMPTY, Insets.EMPTY)));
 
         dropShadow.setRadius(DROP_RADIUS);
         dropShadow.setSpread(0.75);
