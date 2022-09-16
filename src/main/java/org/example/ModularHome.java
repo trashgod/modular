@@ -1,9 +1,11 @@
 package org.example;
 
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -19,6 +21,19 @@ import org.example.math.ModularApp;
  * A home for {@code Modular} applications.
  */
 public class ModularHome extends Application {
+
+    private Modular load(String s) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(s));
+        try {
+            fxmlLoader.load();
+            ModularController controller = fxmlLoader.getController();
+            controller.setContent(fxmlLoader.getRoot());
+            return controller;
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+        return null;
+    }
 
     private Tab createTab(Stage stage, Modular module) {
         Tab tab = new Tab(module.getShortName());
