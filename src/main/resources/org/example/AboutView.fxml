@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.AboutController"
+      fx:controller="org.example.AboutController" fx:id="root"
       style="-fx-alignment: center; -fx-spacing: 32; -fx-padding: 32">
     <Text fx:id="title" text="Modular Home"
           style="-fx-font-family: serif; -fx-font-size: 42;

@@ -1,15 +1,19 @@
 package org.example;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * About application controller
  */
-public class AboutController implements ModularController {
+public class AboutController extends Application implements Modular {
 
+    @FXML
+    private Node root;
     @FXML
     private String name;
     @FXML
@@ -20,7 +24,6 @@ public class AboutController implements ModularController {
     private Text version;
     @FXML
     private Hyperlink link;
-    private Node root;
 
     @FXML
     public void initialize() {
@@ -29,16 +32,12 @@ public class AboutController implements ModularController {
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
+        link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
     }
 
     @Override
     public Node createContent() {
         return root;
-    }
-
-    @Override
-    public void setContent(Node root) {
-        this.root = root;
     }
 
     @Override
@@ -49,5 +48,9 @@ public class AboutController implements ModularController {
     @Override
     public String getShortName() {
         return shortName;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
     }
 }

@@ -22,13 +22,11 @@ import org.example.math.ModularApp;
  */
 public class ModularHome extends Application {
 
-    private Modular load(String s) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(s));
+    private Modular load(String name) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
         try {
             fxmlLoader.load();
-            ModularController controller = fxmlLoader.getController();
-            controller.setContent(fxmlLoader.getRoot());
-            return controller;
+            return fxmlLoader.getController();
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
@@ -62,6 +60,7 @@ public class ModularHome extends Application {
         list.add(createTab(stage, new HTreeApp()));
         list.add(createTab(stage, new ModularApp()));
         list.add(createTab(stage, new AboutApp()));
+        //list.add(createTab(stage, load("AboutView.fxml")));
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);
         stage.show();
