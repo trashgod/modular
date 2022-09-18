@@ -4,19 +4,18 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
  * About application controller
  */
-public class AboutController extends Application implements Modular {
+public class AboutController implements ModularController {
 
     @FXML
     private Node root;
@@ -37,18 +36,19 @@ public class AboutController extends Application implements Modular {
 
     private final DropShadow dropShadow = new DropShadow();
     private final Timeline timeline = new Timeline();
+    private HostServices hostServices;
 
     @FXML
     public void initialize() {
+        title.setEffect(dropShadow);
         version.setText(
             System.getProperty("os.name")
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
-        link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
+        link.setOnAction((a) -> hostServices.showDocument(link.getText()));
         dropShadow.setRadius(radius);
         dropShadow.setSpread(spread);
-        title.setEffect(dropShadow);
         KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0, Interpolator.EASE_OUT);
         KeyFrame k = new KeyFrame(new Duration(1000), r);
         timeline.getKeyFrames().add(k);
@@ -80,6 +80,7 @@ public class AboutController extends Application implements Modular {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
     }
 }

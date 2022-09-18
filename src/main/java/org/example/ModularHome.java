@@ -26,7 +26,11 @@ public class ModularHome extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
         try {
             fxmlLoader.load();
-            return fxmlLoader.getController();
+            Modular controller = fxmlLoader.getController();
+            if (controller instanceof ModularController mc) {
+                mc.setHostServices(getHostServices());
+            }
+            return controller;
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
