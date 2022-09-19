@@ -1,6 +1,6 @@
 package org.example;
 
-import javafx.scene.Node;
+import javafx.scene.Parent;
 
 /**
  * Methods implemented by a {@code Modular} application. A {@code Modular}
@@ -31,7 +31,7 @@ public interface Modular {
      *
      * @return the {@code Modular} application's content
      */
-    public Node createContent();
+    public Parent createContent();
 
     /**
      * Return the application's full name.

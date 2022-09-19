@@ -1,106 +1,28 @@
 package org.example;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  * About Modular Application
  */
-public class AboutApp extends Application implements Modular {
-
-    private static final int PADDING = 32;
-    private static final int DROP_RADIUS = 24;
-    private static final Color START_TITLE_COLOR = Color.NAVY;
-    private static final Color TARGET_TITLE_COLOR = Color.BLUE;
-    private static final Color G1_COLOR = Color.LIGHTBLUE;
-    private static final Color G2_COLOR = Color.ALICEBLUE;
-    private final DropShadow dropShadow = new DropShadow();
-    private final Text title = new Text("Modular Home");
-    private final Timeline timeline = new Timeline();
+public class AboutApp extends Application {
 
     @Override
-    public void start(Stage stage) {
-        stage.setTitle("AboutApp");
-        StackPane root = new StackPane();
-        root.getChildren().add(createContent());
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AboutView.fxml"));
+        fxmlLoader.load();
+        AboutController controller = fxmlLoader.getController();
+        controller.setHostServices(getHostServices());
+        stage.setScene(new Scene(controller.createContent()));
+        stage.setTitle(controller.getShortName());
+        stage.sizeToScene();
         stage.show();
-        Platform.runLater(whenSelected());
-    }
-
-    @Override
-    public Node createContent() {
-        title.setStyle("-fx-font-family: serif; -fx-font-size: 42;"
-            + "-fx-font-style: oblique; -fx-font-weight: bold");
-        Text version = new Text(
-            System.getProperty("os.name")
-            + " v" + System.getProperty("os.version")
-            + "; Java v" + System.getProperty("java.version")
-            + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
-        version.setStyle("-fx-font-family: serif; -fx-font-size: 16");
-        Hyperlink link = new Hyperlink("https://github.com/trashgod/modular");
-        link.setTextFill(TARGET_TITLE_COLOR);
-        link.setOnAction((a) -> getHostServices().showDocument(link.getText()));
-        VBox box = new VBox(PADDING, title, version, link);
-        box.setPadding(new Insets(PADDING));
-        box.setAlignment(Pos.CENTER);
-        Stop[] stops = new Stop[]{new Stop(0, G1_COLOR), new Stop(0.5, G2_COLOR), new Stop(1, G1_COLOR)};
-        LinearGradient lg = new LinearGradient(0, 0, 1, 1, true, CycleMethod.NO_CYCLE, stops);
-        box.setBackground(new Background(new BackgroundFill(lg, CornerRadii.EMPTY, Insets.EMPTY)));
-
-        dropShadow.setRadius(DROP_RADIUS);
-        dropShadow.setSpread(0.75);
-        title.setEffect(dropShadow);
-        title.setFill(START_TITLE_COLOR);
-        KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0, Interpolator.EASE_OUT);
-        KeyValue c = new KeyValue(title.fillProperty(), TARGET_TITLE_COLOR, Interpolator.EASE_OUT);
-        KeyFrame k = new KeyFrame(new Duration(1000), c, r);
-        timeline.getKeyFrames().add(k);
-        return box;
-    }
-
-    @Override
-    public String getName() {
-        return "About Modular Application";
-    }
-
-    @Override
-    public String getShortName() {
-        return "About";
-    }
-
-    @Override
-    public Runnable whenSelected() {
-        return this::animateDropShadow;
-    }
-
-    private void animateDropShadow() {
-        dropShadow.setRadius(DROP_RADIUS);
-        title.setFill(START_TITLE_COLOR);
-        timeline.play();
+        Platform.runLater(controller.whenSelected());
     }
 
     public static void main(String[] args) {

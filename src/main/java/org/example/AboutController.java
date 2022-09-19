@@ -6,7 +6,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.text.Text;
@@ -18,7 +18,7 @@ import javafx.util.Duration;
 public class AboutController implements ModularController {
 
     @FXML
-    private Node root;
+    private Parent root;
     @FXML
     private Text title;
     @FXML
@@ -65,7 +65,7 @@ public class AboutController implements ModularController {
     }
 
     @Override
-    public Node createContent() {
+    public Parent createContent() {
         return root;
     }
 
