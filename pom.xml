@@ -63,7 +63,13 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>${mainClass}</mainClass>
+                    <stripDebug>true</stripDebug>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <noManPages>true</noManPages>
+                    <launcher>modular</launcher>
+                    <jlinkImageName>modular</jlinkImageName>
+                    <mainClass>modular/${mainClass}</mainClass>
                 </configuration>
                 <executions>
                     <execution>
