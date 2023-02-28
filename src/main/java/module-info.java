@@ -5,4 +5,6 @@ module modular {
     exports org.example.gui;
     exports org.example.math;
     opens org.example to javafx.fxml;
+    exports org.example.status;
+    opens org.example.status to javafx.fxml;
 }
