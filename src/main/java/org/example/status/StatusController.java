@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.util.Duration;
 import org.example.Modular;
 
@@ -37,11 +36,8 @@ public class StatusController implements Modular {
     private LineChart chart;
     @FXML
     private NumberAxis xAxis;
-    @FXML
-    private NumberAxis yAxis;
-    @FXML
-    private Button gc;
 
+    
     private final XYChart.Series<Number, Number> total = new XYChart.Series<>();
     private final XYChart.Series<Number, Number> used = new XYChart.Series<>();
 
@@ -51,9 +47,9 @@ public class StatusController implements Modular {
         total.setName(tmName);
         used.setName(umName);
         xAxis.setUpperBound(SECONDS);
-        var start = LocalTime.now();
         xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
-            private DateTimeFormatter f = DateTimeFormatter.ofPattern("mm:ss");
+            private final DateTimeFormatter f = DateTimeFormatter.ofPattern("mm:ss");
+            private final LocalTime start = LocalTime.now();
 
             @Override
             public String toString(Number value) {
