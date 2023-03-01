@@ -13,7 +13,7 @@
     <children>
         <LineChart fx:id="chart" title="Memory Status" VBox.vgrow="ALWAYS">
             <xAxis>
-                <NumberAxis fx:id="xAxis" label="Seconds"
+                <NumberAxis fx:id="xAxis" label="Minutes:Seconds"
                             autoRanging="false" tickUnit="10"/> 
             </xAxis>
             <yAxis>

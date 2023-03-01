@@ -1,5 +1,7 @@
 package org.example.status;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -46,9 +48,18 @@ public class StatusController implements Modular {
     @FXML
     public void initialize() {
         chart.getData().addAll(total, used);
-        xAxis.setUpperBound(SECONDS);
         total.setName(tmName);
         used.setName(umName);
+        xAxis.setUpperBound(SECONDS);
+        var start = LocalTime.now();
+        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+            private DateTimeFormatter f = DateTimeFormatter.ofPattern("mm:ss");
+
+            @Override
+            public String toString(Number value) {
+                return f.format(start.plusSeconds(value.longValue()));
+            }
+        });
         var timeline = new Timeline();
         timeline.getKeyFrames().add(new KeyFrame(
             Duration.seconds(1), new EventHandler<ActionEvent>() {
@@ -71,7 +82,6 @@ public class StatusController implements Modular {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        //gc.fire();
     }
 
     public void handleGC(ActionEvent event) {
