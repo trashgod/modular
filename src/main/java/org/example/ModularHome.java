@@ -63,6 +63,7 @@ public class ModularHome extends Application {
         list.add(createTab(stage, new HSBApp()));
         list.add(createTab(stage, new HTreeApp()));
         list.add(createTab(stage, new ModularApp()));
+        list.add(createTab(stage, load("status/StatusView.fxml")));
         list.add(createTab(stage, load("AboutView.fxml")));
         Scene scene = new Scene(tabPane);
         stage.setScene(scene);

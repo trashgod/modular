@@ -28,4 +28,12 @@ A `Modular` JavaFX application that displays an [`HTree`](https://en.wikipedia.o
 
 This `Modular` JavaFX application renders chords connecting points on a circle. Patterns emerge as the controls are adjusted interactively. The project was inspired by [_Times Tables, Mandelbrot and the Heart of Mathematics_](https://www.youtube.com/watch?v=qhbuKbxJsk8). Typical images produced by the application resemble the ones shown [here](https://github.com/Tonumoy/Modular-Arithmetic-on-a-Circle-in-Python).
 
+## Status Application
+
+A `Modular` JavaFX FXML application that displays a graph of recent memory usage.
+
+## About Application
+
+A `Modular` JavaFX FXML application that displays information about the application and provides a link to this repository.
+
 ![ModularApp.png](images/ModularApp.png)
