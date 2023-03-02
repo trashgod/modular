@@ -31,6 +31,6 @@
         <String fx:id="name" fx:value="Status Application"/>
         <String fx:id="shortName" fx:value="Status"/>
         <String fx:id="tmName" fx:value="Total Memory"/>
-        <String fx:id="umName" fx:value="Free Memory"/>
+        <String fx:id="umName" fx:value="Used Memory"/>
     </fx:define>
 </VBox>
