@@ -33,7 +33,7 @@ public class StatusController implements Modular {
     @FXML
     private String umName;
     @FXML
-    private LineChart chart;
+    private LineChart<Number, Number> chart;
     @FXML
     private NumberAxis xAxis;
 
@@ -43,7 +43,8 @@ public class StatusController implements Modular {
 
     @FXML
     public void initialize() {
-        chart.getData().addAll(total, used);
+        chart.getData().add(total);
+        chart.getData().add(used);
         total.setName(tmName);
         used.setName(umName);
         xAxis.setUpperBound(SECONDS);
