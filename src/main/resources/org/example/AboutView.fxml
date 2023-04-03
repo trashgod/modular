@@ -16,6 +16,10 @@
           style="-fx-font-family: serif; -fx-font-size: 42;
           -fx-font-style: oblique; -fx-font-weight: bold; -fx-fill: blue">
     </Text>
+    <Text fx:id="epigram" text="JavaFX…coming into focus."
+          style="-fx-font-family: serif; -fx-font-size: 18;
+          -fx-font-style: oblique">
+    </Text>
     <Text fx:id="version" text="Version"
           style="-fx-font-family: serif; -fx-font-size: 16">
     </Text>
