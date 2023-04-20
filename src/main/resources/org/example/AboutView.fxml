@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.Double?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
@@ -14,6 +14,9 @@
     <Text fx:id="title" text="Modular Home"
           style="-fx-font-family: serif; -fx-font-size: 42;
           -fx-font-style: oblique; -fx-font-weight: bold; -fx-fill: blue">
+        <effect>
+            <DropShadow fx:id="dropShadow" radius="24" spread="0.75"/>
+        </effect>
     </Text>
     <Text fx:id="epigram" text="JavaFX…coming into focus."
           style="-fx-font-family: serif; -fx-font-size: 18;
@@ -28,8 +31,6 @@
     <fx:define>
         <String fx:id="name" fx:value="About Modular Application"/>
         <String fx:id="shortName" fx:value="About"/>
-        <Double fx:id="radius" fx:value="24.0"/>
-        <Double fx:id="spread" fx:value="0.75"/>
     </fx:define>
 </VBox>
 

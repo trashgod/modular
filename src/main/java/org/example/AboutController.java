@@ -30,25 +30,20 @@ public class AboutController implements ModularController {
     @FXML
     private String shortName;
     @FXML
-    private Double radius;
-    @FXML
-    private Double spread;
-
-    private final DropShadow dropShadow = new DropShadow();
+    private DropShadow dropShadow;
+    private double radius;
     private final Timeline timeline = new Timeline();
     private HostServices hostServices;
 
     @FXML
     public void initialize() {
-        title.setEffect(dropShadow);
+        radius = dropShadow.getRadius();
         version.setText(
             System.getProperty("os.name")
             + " v" + System.getProperty("os.version")
             + "; Java v" + System.getProperty("java.version")
             + "; JavaFX v" + System.getProperty("javafx.runtime.version"));
         link.setOnAction((a) -> hostServices.showDocument(link.getText()));
-        dropShadow.setRadius(radius);
-        dropShadow.setSpread(spread);
         KeyValue r = new KeyValue(dropShadow.radiusProperty(), 0, Interpolator.EASE_OUT);
         KeyFrame k = new KeyFrame(new Duration(1000), r);
         timeline.getKeyFrames().add(k);
