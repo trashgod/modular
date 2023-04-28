@@ -54,6 +54,7 @@ public class AboutController implements ModularController {
         return this::animateDropShadow;
     }
 
+    @FXML
     private void animateDropShadow() {
         dropShadow.setRadius(radius);
         timeline.play();

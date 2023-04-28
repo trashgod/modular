@@ -8,6 +8,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.AboutController" fx:id="root"
+      onMouseClicked="#animateDropShadow"
       style="-fx-alignment: center; -fx-spacing: 32; -fx-padding: 32;
           -fx-background-color: linear-gradient(to bottom right,
           lightblue 0%, aliceblue 50%, lightblue 100%)">
