@@ -15,7 +15,7 @@ import javafx.util.Duration;
 /**
  * About application controller
  */
-public class AboutController implements ModularController {
+public class AboutController implements Modular {
 
     @FXML
     private Parent root;
@@ -33,7 +33,11 @@ public class AboutController implements ModularController {
     private DropShadow dropShadow;
     private double radius;
     private final Timeline timeline = new Timeline();
-    private HostServices hostServices;
+    private final HostServices hostServices;
+
+    public AboutController(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
 
     @FXML
     public void initialize() {
@@ -73,10 +77,5 @@ public class AboutController implements ModularController {
     @Override
     public String getShortName() {
         return shortName;
-    }
-
-    @Override
-    public void setHostServices(HostServices hostServices) {
-        this.hostServices = hostServices;
     }
 }

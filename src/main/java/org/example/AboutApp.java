@@ -15,9 +15,9 @@ public class AboutApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AboutView.fxml"));
+        fxmlLoader.setControllerFactory(new ModularController.HostServicesFactory(this.getHostServices()));
         fxmlLoader.load();
         AboutController controller = fxmlLoader.getController();
-        controller.setHostServices(getHostServices());
         stage.setScene(new Scene(controller.createContent()));
         stage.setTitle(controller.getShortName());
         stage.sizeToScene();

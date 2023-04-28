@@ -21,22 +21,19 @@ import org.example.math.ModularApp;
  * A home for {@code Modular} applications.
  */
 public class ModularHome extends Application {
-
+    
     private Modular load(String name) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
+        fxmlLoader.setControllerFactory(new ModularController.HostServicesFactory(this.getHostServices()));
         try {
             fxmlLoader.load();
-            Modular controller = fxmlLoader.getController();
-            if (controller instanceof ModularController mc) {
-                mc.setHostServices(getHostServices());
-            }
-            return controller;
+            return fxmlLoader.getController();
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
         return null;
     }
-
+    
     private Tab createTab(Stage stage, Modular module) {
         Tab tab = new Tab(module.getShortName());
         tab.setTooltip(new Tooltip(module.getName()));
@@ -53,7 +50,7 @@ public class ModularHome extends Application {
         });
         return tab;
     }
-
+    
     @Override
     public void start(Stage stage) {
         TabPane tabPane = new TabPane();
@@ -69,7 +66,7 @@ public class ModularHome extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }
