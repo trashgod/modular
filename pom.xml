@@ -6,7 +6,7 @@
     <version>4.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>org.example.ModularHome</mainClass>
+        <mainClass>org.example.ModularApp</mainClass>
     </properties>
     <dependencies>
         <dependency>

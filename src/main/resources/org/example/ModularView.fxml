@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17"
+         fx:controller="org.example.ModularHome"
+         fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+    <fx:define>
+        <String fx:id="name" fx:value="Modular Home"/>
+        <String fx:id="shortName" fx:value="ModularHome"/>
+    </fx:define>
+</TabPane>
