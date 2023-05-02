@@ -1,7 +1,7 @@
 package org.example;
 
 import java.io.IOException;
-import javafx.application.HostServices;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
+import javafx.stage.Stage;
 import org.example.gui.BlendApp;
 import org.example.gui.HSBApp;
 import org.example.math.HTreeApp;
@@ -26,16 +27,20 @@ public class ModularHome implements Modular {
     private String name;
     @FXML
     private String shortName;
-    
-    private final HostServices hostServices;
 
-    public ModularHome(HostServices hostServices) {
-        this.hostServices = hostServices;
+    private final Application application;
+    private final Stage stage;
+
+    public ModularHome(Application application, Stage stage) {
+        this.application = application;
+        this.stage = stage;
     }
 
     private Modular load(String name) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
-        fxmlLoader.setControllerFactory(new ModularController.HostServicesFactory(hostServices));
+        fxmlLoader.setControllerFactory(
+            new ModularController.HostServicesFactory(
+                application.getHostServices()));
         try {
             fxmlLoader.load();
             return fxmlLoader.getController();
@@ -50,7 +55,7 @@ public class ModularHome implements Modular {
         tab.setTooltip(new Tooltip(module.getName()));
         tab.selectedProperty().addListener((var o) -> {
             if (tab.isSelected()) {
-                //stage.setTitle(module.getName());
+                stage.setTitle(module.getName());
                 if (tab.getContent() == null) {
                     tab.setContent(module.createContent());
                 }

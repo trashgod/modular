@@ -14,7 +14,7 @@ public class ModularApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModularView.fxml"));
-        fxmlLoader.setControllerFactory(new ModularController.HostServicesFactory(this.getHostServices()));
+        fxmlLoader.setControllerFactory(new ModularController.HomeFactory(this, stage));
         fxmlLoader.load();
         ModularHome controller = fxmlLoader.getController();
         stage.setScene(new Scene(controller.createContent()));
