@@ -1,6 +1,6 @@
 # Modular Project
 
-Project *modular* is a simple framework that provides a home for `Modular` JavaFX applications. Applications that implement the `Modular` interface can easily be added to the `ModularHome` application.
+Project *modular* is a simple framework that provides a home for `Modular` JavaFX applications. Applications or controllers that implement the `Modular` interface can easily be added to the `ModularHome` controller. See the [wiki](https://github.com/trashgod/modular/wiki) for additional details.
 
 To run the program from the command line, type:
 
