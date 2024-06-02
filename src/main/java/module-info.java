@@ -1,4 +1,5 @@
 module modular {
+    requires java.logging;
     requires javafx.controls;
     requires javafx.fxml;
     exports org.example;

@@ -1,6 +1,8 @@
 package org.example.gui;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Properties;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,7 +38,7 @@ public class BlendModel {
         try (var in = getClass().getResourceAsStream("mode.properties")) {
             glossary.load(in);
         } catch (IOException e) {
-            e.printStackTrace(System.err);
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         mode.addListener((o) -> {
             BlendMode m = mode.get();
