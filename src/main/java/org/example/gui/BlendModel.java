@@ -1,7 +1,6 @@
 package org.example.gui;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -34,8 +33,7 @@ public class BlendModel {
     private static final Properties glossary = new Properties();
 
     public BlendModel() {
-        InputStream in = getClass().getResourceAsStream("mode.properties");
-        try {
+        try (var in = getClass().getResourceAsStream("mode.properties")) {
             glossary.load(in);
         } catch (IOException e) {
             e.printStackTrace(System.err);
