@@ -1,6 +1,8 @@
 package org.example;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -45,7 +47,7 @@ public class ModularHome implements Modular {
             fxmlLoader.load();
             return fxmlLoader.getController();
         } catch (IOException e) {
-            e.printStackTrace(System.err);
+            Logger.getGlobal().log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
     }
