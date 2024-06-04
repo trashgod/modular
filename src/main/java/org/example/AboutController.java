@@ -40,7 +40,7 @@ public class AboutController implements Modular {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         radius = dropShadow.getRadius();
         version.setText(
             System.getProperty("os.name")

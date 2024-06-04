@@ -42,7 +42,7 @@ public class StatusController implements Modular {
     private final XYChart.Series<Number, Number> used = new XYChart.Series<>();
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         chart.getData().add(total);
         chart.getData().add(used);
         total.setName(tmName);

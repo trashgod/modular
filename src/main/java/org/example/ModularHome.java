@@ -70,7 +70,7 @@ public class ModularHome implements Modular {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         ObservableList<Tab> list = tabPane.getTabs();
         list.add(createTab(new BlendApp()));
         list.add(createTab(new HSBApp()));
