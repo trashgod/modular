@@ -6,18 +6,19 @@
     <version>5.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <fxVersion>21.0.5</fxVersion>
         <mainClass>org.example.ModularApp</mainClass>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>21.0.4</version>
+            <version>${fxVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>21.0.4</version>
+            <version>${fxVersion}</version>
         </dependency>
     </dependencies>
     <build>
