@@ -6,7 +6,7 @@
     <version>5.1-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <fxVersion>21.0.7</fxVersion>
+        <fxVersion>21.0.9</fxVersion>
         <mainClass>org.example.ModularApp</mainClass>
     </properties>
     <dependencies>
